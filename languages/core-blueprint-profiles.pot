@@ -1,0 +1,248 @@
+msgid ""
+msgstr "Project-Id-Version: Core Blueprint Profiles 1.0.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\n"
+
+msgid "Anonymous identifier — Recommended for privacy"
+msgstr ""
+
+msgid "Anonymous:"
+msgstr ""
+
+msgid "Builder and theme usage"
+msgstr ""
+
+msgid "By default, enabled WordPress users can have a profile. Exclude roles that should never have a profile page, such as administrator or technical accounts."
+msgstr ""
+
+msgid "Choose a different profile URL."
+msgstr ""
+
+msgid "Choose a unique profile URL. Email addresses and login names are never accepted as profile slugs."
+msgstr ""
+
+msgid "Choose what logged-out visitors should see when they open a profile URL."
+msgstr ""
+
+msgid "Choose who can open an enabled user profile."
+msgstr ""
+
+msgid "Core Blueprint"
+msgstr ""
+
+msgid "Core Blueprint Profiles"
+msgstr ""
+
+msgid "Create frontend profile pages for WordPress users. When disabled, all profile URLs return a real 404."
+msgstr ""
+
+msgid "Create privacy-aware profile pages for your WordPress users. Choose who can view them, how profile URLs are created, and which users should have a profile."
+msgstr ""
+
+msgid "Custom page"
+msgstr ""
+
+msgid "Custom page source"
+msgstr ""
+
+msgid "Disable this to make this user’s profile URL return a real 404, regardless of the global visibility setting."
+msgstr ""
+
+msgid "Display name"
+msgstr ""
+
+msgid "Display name:"
+msgstr ""
+
+msgid "Enable profile pages"
+msgstr ""
+
+msgid "Enable this user’s profile page"
+msgstr ""
+
+msgid "Everyone"
+msgstr ""
+
+msgid "Example URL:"
+msgstr ""
+
+msgid "Example: %s"
+msgstr ""
+
+msgid "First and last name"
+msgstr ""
+
+msgid "General"
+msgstr ""
+
+msgid "Hide profiles for selected roles"
+msgstr ""
+
+msgid "How should new profile URLs be created?"
+msgstr ""
+
+msgid "Include theme footer"
+msgstr ""
+
+msgid "Include theme header"
+msgstr ""
+
+msgid "Invalid profile user."
+msgstr ""
+
+msgid "Leave empty to use the WordPress login page and return the visitor to the requested profile after login."
+msgstr ""
+
+msgid "Let users choose their own profile URL"
+msgstr ""
+
+msgid "Logged-in users only"
+msgstr ""
+
+msgid "Logged-out visitor action"
+msgstr ""
+
+msgid "Manage Profiles"
+msgstr ""
+
+msgid "Name:"
+msgstr ""
+
+msgid "Only published pages and supported template post types are rendered."
+msgstr ""
+
+msgid "Page or template ID"
+msgstr ""
+
+msgid "Profile URL"
+msgstr ""
+
+msgid "Profile URL customization is disabled by the site administrator."
+msgstr ""
+
+msgid "Profile URL examples"
+msgstr ""
+
+msgid "Profile URLs"
+msgstr ""
+
+msgid "Profile URLs cannot contain or be derived from an email address or login name."
+msgstr ""
+
+msgid "Profile base path"
+msgstr ""
+
+msgid "Profile not found."
+msgstr ""
+
+msgid "Profile page"
+msgstr ""
+
+msgid "Profile pages"
+msgstr ""
+
+msgid "Profile pages are currently disabled."
+msgstr ""
+
+msgid "Profiles"
+msgstr ""
+
+msgid "Profiles are currently visible to everyone."
+msgstr ""
+
+msgid "Profiles are limited to logged-in users."
+msgstr ""
+
+msgid "Profiles remain native WordPress author archives. Build your author archive with your theme or page builder and use normal WordPress user data or ACF user fields."
+msgstr ""
+
+msgid "Profiles settings"
+msgstr ""
+
+msgid "Redirect"
+msgstr ""
+
+msgid "Redirect URL"
+msgstr ""
+
+msgid "Restricted Access"
+msgstr ""
+
+msgid "Restricted Access settings are only used when profiles are limited to logged-in users."
+msgstr ""
+
+msgid "Save settings"
+msgstr ""
+
+msgid "Selected roles:"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Shortcode"
+msgstr ""
+
+msgid "Show 404"
+msgstr ""
+
+msgid "Show or hide role options"
+msgstr ""
+
+msgid "Template shortcode"
+msgstr ""
+
+msgid "That profile URL is already in use."
+msgstr ""
+
+msgid "The part of the URL that comes before the individual profile identifier."
+msgstr ""
+
+msgid "These settings apply only to profiles that exist but require a logged-in account. Hidden or excluded profiles always return a real 404."
+msgstr ""
+
+msgid "These settings will apply if profile pages are enabled and limited to logged-in users."
+msgstr ""
+
+msgid "This is used only when a profile URL is created for the first time. Existing profile URLs do not change automatically. Login names and email addresses are never used."
+msgstr ""
+
+msgid "This profile is available to logged-in users only."
+msgstr ""
+
+msgid "Usage"
+msgstr ""
+
+msgid "Use a shortcode supplied by Bricks, Elementor or another builder/plugin."
+msgstr ""
+
+msgid "Users can replace their generated profile identifier with a unique name of their choice. Administrators can always change it."
+msgstr ""
+
+msgid "Users with these roles do not have a profile page; their profile URL returns a real 404."
+msgstr ""
+
+msgid "What should logged-out visitors see?"
+msgstr ""
+
+msgid "Who can view profiles?"
+msgstr ""
+
+msgid "Who should have a profile?"
+msgstr ""
+
+msgid "You are not allowed to manage Profiles."
+msgstr ""
+
+msgid "canonical profile URL."
+msgstr ""
+
+msgid "current WordPress profile user."
+msgstr ""
+
+msgid "current profile user ID."
+msgstr ""
+
+msgid "profile visibility check."
+msgstr ""
+
+msgid "whether the current request is a profile."
+msgstr ""

@@ -1,0 +1,248 @@
+msgid ""
+msgstr "Project-Id-Version: Core Blueprint Profiles 1.0.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nLanguage: nl_NL\n"
+
+msgid "Anonymous identifier — Recommended for privacy"
+msgstr "Anonieme identificatiecode — Aanbevolen voor privacy"
+
+msgid "Anonymous:"
+msgstr "Anoniem:"
+
+msgid "Builder and theme usage"
+msgstr "Gebruik met builder en thema"
+
+msgid "By default, enabled WordPress users can have a profile. Exclude roles that should never have a profile page, such as administrator or technical accounts."
+msgstr "Standaard kunnen ingeschakelde WordPress-gebruikers een profiel hebben. Sluit rollen uit die nooit een profielpagina mogen hebben, zoals beheerders of technische accounts."
+
+msgid "Choose a different profile URL."
+msgstr "Kies een andere profiel-URL."
+
+msgid "Choose a unique profile URL. Email addresses and login names are never accepted as profile slugs."
+msgstr "Kies een unieke profiel-URL. E-mailadressen en inlognamen worden nooit geaccepteerd als profielslug."
+
+msgid "Choose what logged-out visitors should see when they open a profile URL."
+msgstr "Kies wat uitgelogde bezoekers moeten zien wanneer ze een profiel-URL openen."
+
+msgid "Choose who can open an enabled user profile."
+msgstr "Kies wie een ingeschakeld gebruikersprofiel kan openen."
+
+msgid "Core Blueprint"
+msgstr "Core Blueprint"
+
+msgid "Core Blueprint Profiles"
+msgstr "Core Blueprint Profiles"
+
+msgid "Create frontend profile pages for WordPress users. When disabled, all profile URLs return a real 404."
+msgstr "Maak profielpagina’s aan de voorkant van de site voor WordPress-gebruikers. Wanneer dit is uitgeschakeld, geven alle profiel-URL’s een echte 404 terug."
+
+msgid "Create privacy-aware profile pages for your WordPress users. Choose who can view them, how profile URLs are created, and which users should have a profile."
+msgstr "Maak privacybewuste profielpagina’s voor je WordPress-gebruikers. Kies wie ze kan bekijken, hoe profiel-URL’s worden aangemaakt en welke gebruikers een profiel krijgen."
+
+msgid "Custom page"
+msgstr "Aangepaste pagina"
+
+msgid "Custom page source"
+msgstr "Bron voor aangepaste pagina"
+
+msgid "Disable this to make this user’s profile URL return a real 404, regardless of the global visibility setting."
+msgstr "Schakel dit uit om de profiel-URL van deze gebruiker een echte 404 te laten teruggeven, ongeacht de globale zichtbaarheidsinstelling."
+
+msgid "Display name"
+msgstr "Weergavenaam"
+
+msgid "Display name:"
+msgstr "Weergavenaam:"
+
+msgid "Enable profile pages"
+msgstr "Profielpagina’s inschakelen"
+
+msgid "Enable this user’s profile page"
+msgstr "Profielpagina van deze gebruiker inschakelen"
+
+msgid "Everyone"
+msgstr "Iedereen"
+
+msgid "Example URL:"
+msgstr "Voorbeeld-URL:"
+
+msgid "Example: %s"
+msgstr "Voorbeeld: %s"
+
+msgid "First and last name"
+msgstr "Voor- en achternaam"
+
+msgid "General"
+msgstr "Algemeen"
+
+msgid "Hide profiles for selected roles"
+msgstr "Profielen verbergen voor geselecteerde rollen"
+
+msgid "How should new profile URLs be created?"
+msgstr "Hoe moeten nieuwe profiel-URL’s worden aangemaakt?"
+
+msgid "Include theme footer"
+msgstr "Themafooter opnemen"
+
+msgid "Include theme header"
+msgstr "Themaheader opnemen"
+
+msgid "Invalid profile user."
+msgstr "Ongeldige profielgebruiker."
+
+msgid "Leave empty to use the WordPress login page and return the visitor to the requested profile after login."
+msgstr "Laat leeg om de WordPress-inlogpagina te gebruiken en de bezoeker na het inloggen terug te sturen naar het opgevraagde profiel."
+
+msgid "Let users choose their own profile URL"
+msgstr "Gebruikers hun eigen profiel-URL laten kiezen"
+
+msgid "Logged-in users only"
+msgstr "Alleen ingelogde gebruikers"
+
+msgid "Logged-out visitor action"
+msgstr "Actie voor uitgelogde bezoekers"
+
+msgid "Manage Profiles"
+msgstr "Profielen beheren"
+
+msgid "Name:"
+msgstr "Naam:"
+
+msgid "Only published pages and supported template post types are rendered."
+msgstr "Alleen gepubliceerde pagina’s en ondersteunde template-posttypes worden weergegeven."
+
+msgid "Page or template ID"
+msgstr "Pagina- of template-ID"
+
+msgid "Profile URL"
+msgstr "Profiel-URL"
+
+msgid "Profile URL customization is disabled by the site administrator."
+msgstr "Het aanpassen van de profiel-URL is uitgeschakeld door de sitebeheerder."
+
+msgid "Profile URL examples"
+msgstr "Voorbeelden van profiel-URL’s"
+
+msgid "Profile URLs"
+msgstr "Profiel-URL’s"
+
+msgid "Profile URLs cannot contain or be derived from an email address or login name."
+msgstr "Profiel-URL’s mogen geen e-mailadres of inlognaam bevatten of daarvan zijn afgeleid."
+
+msgid "Profile base path"
+msgstr "Basispad voor profielen"
+
+msgid "Profile not found."
+msgstr "Profiel niet gevonden."
+
+msgid "Profile page"
+msgstr "Profielpagina"
+
+msgid "Profile pages"
+msgstr "Profielpagina’s"
+
+msgid "Profile pages are currently disabled."
+msgstr "Profielpagina’s zijn momenteel uitgeschakeld."
+
+msgid "Profiles"
+msgstr "Profielen"
+
+msgid "Profiles are currently visible to everyone."
+msgstr "Profielen zijn momenteel voor iedereen zichtbaar."
+
+msgid "Profiles are limited to logged-in users."
+msgstr "Profielen zijn beperkt tot ingelogde gebruikers."
+
+msgid "Profiles remain native WordPress author archives. Build your author archive with your theme or page builder and use normal WordPress user data or ACF user fields."
+msgstr "Profielen blijven native WordPress-auteursarchieven. Bouw het auteursarchief met je thema of page builder en gebruik normale WordPress-gebruikersdata of ACF-gebruikersvelden."
+
+msgid "Profiles settings"
+msgstr "Profielinstellingen"
+
+msgid "Redirect"
+msgstr "Doorsturen"
+
+msgid "Redirect URL"
+msgstr "Doorstuur-URL"
+
+msgid "Restricted Access"
+msgstr "Beperkte toegang"
+
+msgid "Restricted Access settings are only used when profiles are limited to logged-in users."
+msgstr "Instellingen voor beperkte toegang worden alleen gebruikt wanneer profielen beperkt zijn tot ingelogde gebruikers."
+
+msgid "Save settings"
+msgstr "Instellingen opslaan"
+
+msgid "Selected roles:"
+msgstr "Geselecteerde rollen:"
+
+msgid "Settings"
+msgstr "Instellingen"
+
+msgid "Shortcode"
+msgstr "Shortcode"
+
+msgid "Show 404"
+msgstr "404 tonen"
+
+msgid "Show or hide role options"
+msgstr "Rolopties tonen of verbergen"
+
+msgid "Template shortcode"
+msgstr "Template-shortcode"
+
+msgid "That profile URL is already in use."
+msgstr "Die profiel-URL is al in gebruik."
+
+msgid "The part of the URL that comes before the individual profile identifier."
+msgstr "Het deel van de URL dat vóór de individuele profielidentificatie staat."
+
+msgid "These settings apply only to profiles that exist but require a logged-in account. Hidden or excluded profiles always return a real 404."
+msgstr "Deze instellingen gelden alleen voor profielen die bestaan maar een ingelogd account vereisen. Verborgen of uitgesloten profielen geven altijd een echte 404 terug."
+
+msgid "These settings will apply if profile pages are enabled and limited to logged-in users."
+msgstr "Deze instellingen worden gebruikt wanneer profielpagina’s zijn ingeschakeld en beperkt tot ingelogde gebruikers."
+
+msgid "This is used only when a profile URL is created for the first time. Existing profile URLs do not change automatically. Login names and email addresses are never used."
+msgstr "Dit wordt alleen gebruikt wanneer een profiel-URL voor het eerst wordt aangemaakt. Bestaande profiel-URL’s veranderen niet automatisch. Inlognamen en e-mailadressen worden nooit gebruikt."
+
+msgid "This profile is available to logged-in users only."
+msgstr "Dit profiel is alleen beschikbaar voor ingelogde gebruikers."
+
+msgid "Usage"
+msgstr "Gebruik"
+
+msgid "Use a shortcode supplied by Bricks, Elementor or another builder/plugin."
+msgstr "Gebruik een shortcode van Bricks, Elementor of een andere builder/plugin."
+
+msgid "Users can replace their generated profile identifier with a unique name of their choice. Administrators can always change it."
+msgstr "Gebruikers kunnen hun gegenereerde profielidentificatie vervangen door een unieke naam naar keuze. Beheerders kunnen deze altijd wijzigen."
+
+msgid "Users with these roles do not have a profile page; their profile URL returns a real 404."
+msgstr "Gebruikers met deze rollen hebben geen profielpagina; hun profiel-URL geeft een echte 404 terug."
+
+msgid "What should logged-out visitors see?"
+msgstr "Wat moeten uitgelogde bezoekers zien?"
+
+msgid "Who can view profiles?"
+msgstr "Wie kan profielen bekijken?"
+
+msgid "Who should have a profile?"
+msgstr "Wie moet een profiel hebben?"
+
+msgid "You are not allowed to manage Profiles."
+msgstr "Je hebt geen toestemming om Profielen te beheren."
+
+msgid "canonical profile URL."
+msgstr "canonieke profiel-URL."
+
+msgid "current WordPress profile user."
+msgstr "huidige WordPress-profielgebruiker."
+
+msgid "current profile user ID."
+msgstr "ID van de huidige profielgebruiker."
+
+msgid "profile visibility check."
+msgstr "controle van profielzichtbaarheid."
+
+msgid "whether the current request is a profile."
+msgstr "of het huidige verzoek een profiel is."

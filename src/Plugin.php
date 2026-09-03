@@ -3,7 +3,6 @@ declare(strict_types=1);
 namespace CB\Profiles;
 
 use CB\Profiles\Admin\Assets;
-use CB\Profiles\Integration\CoreBlueprint;
 use CB\Profiles\Integration\Likes;
 
 defined( 'ABSPATH' ) || exit;
@@ -25,7 +24,6 @@ final class Plugin {
 		Routing::init();
 		DeniedRenderer::init();
 		UserProfile::init();
-		CoreBlueprint::init();
 		Assets::init();
 		Likes::init();
 

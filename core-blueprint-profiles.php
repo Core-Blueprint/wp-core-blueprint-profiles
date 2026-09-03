@@ -49,6 +49,10 @@ spl_autoload_register( static function ( string $class ): void {
 	}
 } );
 
+// First-party suite identity and health must be registered independently of
+// the heavier Profiles runtime gate below.
+\CB\Profiles\Integration\CoreBlueprint::init();
+
 add_action( 'init', static function (): void {
 	load_plugin_textdomain( 'core-blueprint-profiles', false, dirname( CB_PROFILES_BASENAME ) . '/languages' );
 }, 1 );

@@ -1,290 +1,480 @@
+#
 msgid ""
-msgstr "Project-Id-Version: Core Blueprint Profiles 1.0.0-rc1\nLanguage: it_IT\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=(n != 1);\nX-Domain: core-blueprint-profiles\n"
+msgstr ""
+"Project-Id-Version: Core Blueprint Profiles 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-03 00:40+0000\n"
+"PO-Revision-Date: 2026-09-03 00:00+0000\n"
+"Last-Translator: Core Blueprint\n"
+"Language-Team: it_IT\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: core-blueprint-profiles\n"
 
+#: src/Admin/PageContent.php:50
 msgid "Anonymous identifier — Recommended for privacy"
 msgstr "Identificatore anonimo — Consigliato per la privacy"
 
+#: src/Admin/PageContent.php:52
 msgid "Anonymous:"
 msgstr "Anonimo:"
 
+#: src/Admin/PageContent.php:120
 msgid "Builder and theme usage"
 msgstr "Utilizzo con page builder e temi"
 
-msgid "By default, enabled WordPress users can have a profile. Exclude roles that should never have a profile page, such as administrator or technical accounts."
-msgstr "Per impostazione predefinita, gli utenti WordPress abilitati possono avere un profilo. Escludi i ruoli che non dovrebbero mai avere una pagina profilo, come gli amministratori o gli account tecnici."
+#: src/Admin/PageContent.php:65
+msgid ""
+"By default, enabled WordPress users can have a profile. Exclude roles that "
+"should never have a profile page, such as administrator or technical "
+"accounts."
+msgstr ""
+"Per impostazione predefinita, gli utenti WordPress abilitati possono avere "
+"un profilo. Escludi i ruoli che non dovrebbero mai avere una pagina profilo,"
+" come gli amministratori o gli account tecnici."
 
-msgid "canonical profile URL."
-msgstr "URL canonico del profilo."
-
+#: src/ProfileSlug.php:49
 msgid "Choose a different profile URL."
 msgstr "Scegli un URL del profilo diverso."
 
-msgid "Choose a unique profile URL. Email addresses and login names are never accepted as profile slugs."
-msgstr "Scegli un URL del profilo univoco. Gli indirizzi email e i nomi di accesso non vengono mai accettati come slug del profilo."
+#: src/UserProfile.php:39
+msgid ""
+"Choose a unique profile URL. Email addresses and login names are never "
+"accepted as profile slugs."
+msgstr ""
+"Scegli un URL del profilo univoco. Gli indirizzi email e i nomi di accesso "
+"non vengono mai accettati come slug del profilo."
 
-msgid "Choose what logged-out visitors should see when they open a profile URL."
-msgstr "Scegli cosa devono vedere i visitatori non autenticati quando aprono un URL del profilo."
+#: src/Admin/PageContent.php:92
+msgid ""
+"Choose what logged-out visitors should see when they open a profile URL."
+msgstr ""
+"Scegli cosa devono vedere i visitatori non autenticati quando aprono un URL "
+"del profilo."
 
+#: src/Admin/PageContent.php:35
 msgid "Choose who can open an enabled user profile."
 msgstr "Scegli chi può aprire un profilo utente abilitato."
 
-msgid "Code copied."
-msgstr "Codice copiato."
+#: src/Admin/PageContent.php:16
+#, fuzzy
+msgid "Core Blueprint"
+msgstr "Core Blueprint Profiles"
 
-msgid "Copy"
-msgstr "Copia"
+#: core-blueprint-profiles.php:91
+msgid "Core Blueprint Base with API 1.0 or newer is required."
+msgstr "È richiesto Core Blueprint Base con API 1.0 o successiva."
 
-msgid "Copy code"
-msgstr "Copia codice"
-
+#: src/Capabilities.php:13 src/UserProfile.php:24
 msgid "Core Blueprint Profiles"
 msgstr "Core Blueprint Profiles"
 
-msgid "Create frontend profile pages for WordPress users. When disabled, all profile URLs return a real 404."
-msgstr "Crea pagine profilo pubbliche per gli utenti WordPress. Quando questa opzione è disattivata, tutti gli URL dei profili restituiscono un vero errore 404."
+#: src/Admin/PageContent.php:31
+msgid ""
+"Create frontend profile pages for WordPress users. When disabled, all "
+"profile URLs return a real 404."
+msgstr ""
+"Crea pagine profilo pubbliche per gli utenti WordPress. Quando questa "
+"opzione è disattivata, tutti gli URL dei profili restituiscono un vero "
+"errore 404."
 
-msgid "Create privacy-aware profile pages for your WordPress users. Choose who can view them, how profile URLs are created, and which users should have a profile."
-msgstr "Crea pagine profilo attente alla privacy per i tuoi utenti WordPress. Scegli chi può visualizzarle, come vengono creati gli URL dei profili e quali utenti devono avere un profilo."
+#: src/Admin/PageContent.php:17
+msgid ""
+"Create privacy-aware profile pages for your WordPress users. Choose who can "
+"view them, how profile URLs are created, and which users should have a "
+"profile."
+msgstr ""
+"Crea pagine profilo attente alla privacy per i tuoi utenti WordPress. Scegli"
+" chi può visualizzarle, come vengono creati gli URL dei profili e quali "
+"utenti devono avere un profilo."
 
-msgid "current profile user ID."
-msgstr "ID dell’utente del profilo corrente."
-
-msgid "current WordPress profile user."
-msgstr "utente WordPress del profilo corrente."
-
+#: src/Admin/PageContent.php:100
 msgid "Custom page"
 msgstr "Pagina personalizzata"
 
+#: src/Admin/PageContent.php:107
 msgid "Custom page source"
 msgstr "Origine della pagina personalizzata"
 
-msgid "Disable this to make this user’s profile URL return a real 404, regardless of the global visibility setting."
-msgstr "Disattiva questa opzione per fare in modo che l’URL del profilo di questo utente restituisca un vero errore 404, indipendentemente dall’impostazione globale di visibilità."
+#: src/UserProfile.php:31
+msgid ""
+"Disable this to make this user’s profile URL return a real 404, regardless "
+"of the global visibility setting."
+msgstr ""
+"Disattiva questa opzione per fare in modo che l’URL del profilo di questo "
+"utente restituisca un vero errore 404, indipendentemente dall’impostazione "
+"globale di visibilità."
 
+#: src/Admin/PageContent.php:50
 msgid "Display name"
 msgstr "Nome visualizzato"
 
+#: src/Admin/PageContent.php:54
 msgid "Display name:"
 msgstr "Nome visualizzato:"
 
+#: src/Admin/PageContent.php:31
 msgid "Enable profile pages"
 msgstr "Abilita le pagine profilo"
 
+#: src/UserProfile.php:30
 msgid "Enable this user’s profile page"
 msgstr "Abilita la pagina profilo di questo utente"
 
+#: src/Admin/PageContent.php:34
 msgid "Everyone"
 msgstr "Tutti"
 
+#: src/Admin/PageContent.php:123
 msgid "Example URL:"
 msgstr "URL di esempio:"
 
+#: src/Admin/PageContent.php:46
+#, php-format
 msgid "Example: %s"
 msgstr "Esempio: %s"
 
+#: src/Admin/PageContent.php:50
 msgid "First and last name"
 msgstr "Nome e cognome"
 
+#: src/Admin/PageContent.php:20
 msgid "General"
 msgstr "Generale"
 
+#: src/Admin/PageContent.php:69
 msgid "Hide profiles for selected roles"
 msgstr "Nascondi i profili per i ruoli selezionati"
 
+#: src/Admin/PageContent.php:49
 msgid "How should new profile URLs be created?"
 msgstr "Come devono essere creati i nuovi URL dei profili?"
 
+#: src/Admin/PageContent.php:110
 msgid "Include theme footer"
 msgstr "Includi il footer del tema"
 
+#: src/Admin/PageContent.php:110
 msgid "Include theme header"
 msgstr "Includi l’header del tema"
 
+#: src/ProfileSlug.php:39
 msgid "Invalid profile user."
 msgstr "Utente del profilo non valido."
 
-msgid "Leave empty to use the WordPress login page and return the visitor to the requested profile after login."
-msgstr "Lascia vuoto per usare la pagina di accesso di WordPress e riportare il visitatore al profilo richiesto dopo l’accesso."
+#: src/Admin/PageContent.php:103
+msgid ""
+"Leave empty to use the WordPress login page and return the visitor to the "
+"requested profile after login."
+msgstr ""
+"Lascia vuoto per usare la pagina di accesso di WordPress e riportare il "
+"visitatore al profilo richiesto dopo l’accesso."
 
+#: src/Admin/PageContent.php:58
 msgid "Let users choose their own profile URL"
 msgstr "Consenti agli utenti di scegliere il proprio URL del profilo"
 
-msgid "Lightweight privacy-aware WordPress profile pages with configurable URLs, visibility and builder-friendly author archives."
-msgstr "Pagine profilo WordPress leggere e attente alla privacy, con URL e visibilità configurabili e archivi autore compatibili con i page builder."
-
+#: src/Admin/PageContent.php:34
 msgid "Logged-in users only"
 msgstr "Solo utenti autenticati"
 
+#: src/Admin/PageContent.php:100
 msgid "Logged-out visitor action"
 msgstr "Azione per i visitatori non autenticati"
 
+#: src/Capabilities.php:12
 msgid "Manage Profiles"
 msgstr "Gestisci profili"
 
+#: src/Admin/PageContent.php:53
 msgid "Name:"
 msgstr "Nome:"
 
+#: src/Admin/PageContent.php:109
 msgid "Only published pages and supported template post types are rendered."
-msgstr "Vengono mostrate solo le pagine pubblicate e i tipi di contenuto per template supportati."
+msgstr ""
+"Vengono mostrate solo le pagine pubblicate e i tipi di contenuto per "
+"template supportati."
 
+#: src/Admin/PageContent.php:107 src/Admin/PageContent.php:109
 msgid "Page or template ID"
 msgstr "ID pagina o template"
 
-msgid "Profile base path"
-msgstr "Percorso base dei profili"
-
-msgid "Profile not found."
-msgstr "Profilo non trovato."
-
-msgid "Profile page"
-msgstr "Pagina profilo"
-
-msgid "Profile pages"
-msgstr "Pagine profilo"
-
-msgid "Profile pages are currently disabled."
-msgstr "Le pagine profilo sono attualmente disabilitate."
-
+#: src/UserProfile.php:35
 msgid "Profile URL"
 msgstr "URL del profilo"
 
+#: src/UserProfile.php:42
 msgid "Profile URL customization is disabled by the site administrator."
-msgstr "La personalizzazione dell’URL del profilo è disabilitata dall’amministratore del sito."
+msgstr ""
+"La personalizzazione dell’URL del profilo è disabilitata dall’amministratore"
+" del sito."
 
+#: src/Admin/PageContent.php:51
 msgid "Profile URL examples"
 msgstr "Esempi di URL del profilo"
 
+#: src/Admin/PageContent.php:41
 msgid "Profile URLs"
 msgstr "URL dei profili"
 
-msgid "Profile URLs cannot contain or be derived from an email address or login name."
-msgstr "Gli URL dei profili non possono contenere né derivare da un indirizzo email o da un nome di accesso."
+#: src/ProfileSlug.php:44
+msgid ""
+"Profile URLs cannot contain or be derived from an email address or login "
+"name."
+msgstr ""
+"Gli URL dei profili non possono contenere né derivare da un indirizzo email "
+"o da un nome di accesso."
 
-msgid "profile visibility check."
-msgstr "verifica della visibilità del profilo."
+#: src/Admin/PageContent.php:44
+msgid "Profile base path"
+msgstr "Percorso base dei profili"
 
+#: src/DeniedRenderer.php:104
+msgid "Profile not found."
+msgstr "Profilo non trovato."
+
+#: src/UserProfile.php:27
+msgid "Profile page"
+msgstr "Pagina profilo"
+
+#: src/Admin/PageContent.php:29
+msgid "Profile pages"
+msgstr "Pagine profilo"
+
+#: src/Admin/PageContent.php:90
+msgid "Profile pages are currently disabled."
+msgstr "Le pagine profilo sono attualmente disabilitate."
+
+#: src/Admin/CoreBlueprintPage.php:9 src/Admin/CoreBlueprintPage.php:10
+#: src/Admin/PageContent.php:16
 msgid "Profiles"
 msgstr "Profili"
 
+#: src/Admin/PageContent.php:91
 msgid "Profiles are currently visible to everyone."
 msgstr "I profili sono attualmente visibili a tutti."
 
+#: src/Admin/PageContent.php:92
 msgid "Profiles are limited to logged-in users."
 msgstr "I profili sono limitati agli utenti autenticati."
 
-msgid "Profiles remain native WordPress author archives. Build your author archive with your theme or page builder and use normal WordPress user data or ACF user fields."
-msgstr "I profili restano archivi autore nativi di WordPress. Crea il tuo archivio autore con il tema o il page builder e usa i normali dati utente di WordPress o i campi utente ACF."
+#: src/Admin/PageContent.php:122
+msgid ""
+"Profiles remain native WordPress author archives. Build your author archive "
+"with your theme or page builder and use normal WordPress user data or ACF "
+"user fields."
+msgstr ""
+"I profili restano archivi autore nativi di WordPress. Crea il tuo archivio "
+"autore con il tema o il page builder e usa i normali dati utente di "
+"WordPress o i campi utente ACF."
 
+#: src/Admin/PageContent.php:19
 msgid "Profiles settings"
 msgstr "Impostazioni dei profili"
 
-msgid "Redirect"
-msgstr "Reindirizza"
-
-msgid "Redirect URL"
-msgstr "URL di reindirizzamento"
-
-msgid "Restricted Access"
-msgstr "Accesso limitato"
-
-msgid "Restricted Access settings are only used when profiles are limited to logged-in users."
-msgstr "Le impostazioni di accesso limitato vengono usate solo quando i profili sono riservati agli utenti autenticati."
-
-msgid "Save settings"
-msgstr "Salva impostazioni"
-
-msgid "Selected roles:"
-msgstr "Ruoli selezionati:"
-
-msgid "Settings"
-msgstr "Impostazioni"
-
-msgid "Shortcode"
-msgstr "Shortcode"
-
-msgid "Show 404"
-msgstr "Mostra 404"
-
-msgid "Template shortcode"
-msgstr "Shortcode del template"
-
-msgid "That profile URL is already in use."
-msgstr "Questo URL del profilo è già in uso."
-
-msgid "The part of the URL that comes before the individual profile identifier."
-msgstr "La parte dell’URL che precede l’identificatore individuale del profilo."
-
-msgid "These settings apply only to profiles that exist but require a logged-in account. Hidden or excluded profiles always return a real 404."
-msgstr "Queste impostazioni si applicano solo ai profili esistenti che richiedono un account autenticato. I profili nascosti o esclusi restituiscono sempre un vero errore 404."
-
-msgid "These settings will apply if profile pages are enabled and limited to logged-in users."
-msgstr "Queste impostazioni verranno applicate se le pagine profilo sono abilitate e limitate agli utenti autenticati."
-
-msgid "This is used only when a profile URL is created for the first time. Existing profile URLs do not change automatically. Login names and email addresses are never used."
-msgstr "Questa impostazione viene usata solo quando un URL del profilo viene creato per la prima volta. Gli URL dei profili esistenti non cambiano automaticamente. I nomi di accesso e gli indirizzi email non vengono mai utilizzati."
-
-msgid "This profile is available to logged-in users only."
-msgstr "Questo profilo è disponibile solo per gli utenti autenticati."
-
-msgid "Usage"
-msgstr "Utilizzo"
-
-msgid "Use a shortcode supplied by Bricks, Elementor or another builder/plugin."
-msgstr "Usa uno shortcode fornito da Bricks, Elementor o da un altro page builder/plugin."
-
-msgid "Users can replace their generated profile identifier with a unique name of their choice. Administrators can always change it."
-msgstr "Gli utenti possono sostituire l’identificatore del profilo generato con un nome univoco di loro scelta. Gli amministratori possono sempre modificarlo."
-
-msgid "Users with these roles do not have a profile page; their profile URL returns a real 404."
-msgstr "Gli utenti con questi ruoli non hanno una pagina profilo; il loro URL del profilo restituisce un vero errore 404."
-
-msgid "What should logged-out visitors see?"
-msgstr "Cosa devono vedere i visitatori non autenticati?"
-
-msgid "whether the current request is a profile."
-msgstr "se la richiesta corrente corrisponde a un profilo."
-
-msgid "Who can view profiles?"
-msgstr "Chi può visualizzare i profili?"
-
-msgid "Who should have a profile?"
-msgstr "Chi deve avere un profilo?"
-
-msgid "You are not allowed to manage Profiles."
-msgstr "Non hai i permessi per gestire i profili."
-
-msgid "Profiles: profile pages enabled"
-msgstr "Profili: pagine profilo abilitate"
-
-msgid "Profiles: profile pages disabled"
-msgstr "Profili: pagine profilo disabilitate"
-
-msgid "Profiles: visibility changed"
-msgstr "Profili: visibilità modificata"
-
-msgid "Profiles: base URL changed"
-msgstr "Profili: URL di base modificato"
-
+#: src/Support/Audit.php:129
 msgid "Profiles: URL format changed"
 msgstr "Profili: formato URL modificato"
 
-msgid "Profiles: user URL editing policy changed"
-msgstr "Profili: criterio di modifica dell’URL da parte degli utenti modificato"
+#: src/Support/Audit.php:128
+msgid "Profiles: base URL changed"
+msgstr "Profili: URL di base modificato"
 
+#: src/Support/Audit.php:131
 msgid "Profiles: excluded roles changed"
 msgstr "Profili: ruoli esclusi modificati"
 
+#: src/Support/Audit.php:126
+msgid "Profiles: profile pages disabled"
+msgstr "Profili: pagine profilo disabilitate"
+
+#: src/Support/Audit.php:125
+msgid "Profiles: profile pages enabled"
+msgstr "Profili: pagine profilo abilitate"
+
+#: src/Support/Audit.php:132
 msgid "Profiles: restricted access settings changed"
 msgstr "Profili: impostazioni di accesso limitato modificate"
 
-msgid "Profiles: user profile enabled"
-msgstr "Profili: profilo utente abilitato"
+#: src/Support/Audit.php:130
+msgid "Profiles: user URL editing policy changed"
+msgstr ""
+"Profili: criterio di modifica dell’URL da parte degli utenti modificato"
 
-msgid "Profiles: user profile disabled"
-msgstr "Profili: profilo utente disabilitato"
-
+#: src/Support/Audit.php:135
 msgid "Profiles: user profile URL changed"
 msgstr "Profili: URL del profilo utente modificato"
 
+#: src/Support/Audit.php:136
 msgid "Profiles: user profile URL rotated for privacy"
 msgstr "Profili: URL del profilo utente sostituito per motivi di privacy"
+
+#: src/Support/Audit.php:134
+msgid "Profiles: user profile disabled"
+msgstr "Profili: profilo utente disabilitato"
+
+#: src/Support/Audit.php:133
+msgid "Profiles: user profile enabled"
+msgstr "Profili: profilo utente abilitato"
+
+#: src/Support/Audit.php:127
+msgid "Profiles: visibility changed"
+msgstr "Profili: visibilità modificata"
+
+#: src/Admin/PageContent.php:100
+msgid "Redirect"
+msgstr "Reindirizza"
+
+#: src/Admin/PageContent.php:103
+msgid "Redirect URL"
+msgstr "URL di reindirizzamento"
+
+#: src/Admin/PageContent.php:21 src/Admin/PageContent.php:88
+msgid "Restricted Access"
+msgstr "Accesso limitato"
+
+#: src/Admin/PageContent.php:91
+msgid ""
+"Restricted Access settings are only used when profiles are limited to "
+"logged-in users."
+msgstr ""
+"Le impostazioni di accesso limitato vengono usate solo quando i profili sono"
+" riservati agli utenti autenticati."
+
+#: src/Admin/PageContent.php:84 src/Admin/PageContent.php:114
+msgid "Save settings"
+msgstr "Salva impostazioni"
+
+#: src/Admin/PageContent.php:70
+msgid "Selected roles:"
+msgstr "Ruoli selezionati:"
+
+#: src/Integration/CoreBlueprint.php:40
+msgid "Settings"
+msgstr "Impostazioni"
+
+#: src/Admin/PageContent.php:107
+msgid "Shortcode"
+msgstr "Shortcode"
+
+#: src/Admin/PageContent.php:100
+msgid "Show 404"
+msgstr "Mostra 404"
+
+#: src/Admin/PageContent.php:72
+msgid "Show or hide role options"
+msgstr "Mostra o nascondi le opzioni del ruolo"
+
+#: src/Admin/PageContent.php:108
+msgid "Template shortcode"
+msgstr "Shortcode del template"
+
+#: src/ProfileSlug.php:52
+msgid "That profile URL is already in use."
+msgstr "Questo URL del profilo è già in uso."
+
+#: src/Admin/PageContent.php:46
+msgid ""
+"The part of the URL that comes before the individual profile identifier."
+msgstr ""
+"La parte dell’URL che precede l’identificatore individuale del profilo."
+
+#: src/Admin/PageContent.php:99
+msgid ""
+"These settings apply only to profiles that exist but require a logged-in "
+"account. Hidden or excluded profiles always return a real 404."
+msgstr ""
+"Queste impostazioni si applicano solo ai profili esistenti che richiedono un"
+" account autenticato. I profili nascosti o esclusi restituiscono sempre un "
+"vero errore 404."
+
+#: src/Admin/PageContent.php:90
+msgid ""
+"These settings will apply if profile pages are enabled and limited to "
+"logged-in users."
+msgstr ""
+"Queste impostazioni verranno applicate se le pagine profilo sono abilitate e"
+" limitate agli utenti autenticati."
+
+#: src/Admin/PageContent.php:56
+msgid ""
+"This is used only when a profile URL is created for the first time. Existing"
+" profile URLs do not change automatically. Login names and email addresses "
+"are never used."
+msgstr ""
+"Questa impostazione viene usata solo quando un URL del profilo viene creato "
+"per la prima volta. Gli URL dei profili esistenti non cambiano "
+"automaticamente. I nomi di accesso e gli indirizzi email non vengono mai "
+"utilizzati."
+
+#: src/DeniedRenderer.php:159
+msgid "This profile is available to logged-in users only."
+msgstr "Questo profilo è disponibile solo per gli utenti autenticati."
+
+#: src/Admin/PageContent.php:22
+msgid "Usage"
+msgstr "Utilizzo"
+
+#: src/Admin/PageContent.php:108
+msgid ""
+"Use a shortcode supplied by Bricks, Elementor or another builder/plugin."
+msgstr ""
+"Usa uno shortcode fornito da Bricks, Elementor o da un altro page "
+"builder/plugin."
+
+#: src/Admin/PageContent.php:58
+msgid ""
+"Users can replace their generated profile identifier with a unique name of "
+"their choice. Administrators can always change it."
+msgstr ""
+"Gli utenti possono sostituire l’identificatore del profilo generato con un "
+"nome univoco di loro scelta. Gli amministratori possono sempre modificarlo."
+
+#: src/Admin/PageContent.php:70
+msgid ""
+"Users with these roles do not have a profile page; their profile URL returns"
+" a real 404."
+msgstr ""
+"Gli utenti con questi ruoli non hanno una pagina profilo; il loro URL del "
+"profilo restituisce un vero errore 404."
+
+#: src/Admin/PageContent.php:97
+msgid "What should logged-out visitors see?"
+msgstr "Cosa devono vedere i visitatori non autenticati?"
+
+#: src/Admin/PageContent.php:33
+msgid "Who can view profiles?"
+msgstr "Chi può visualizzare i profili?"
+
+#: src/Admin/PageContent.php:63
+msgid "Who should have a profile?"
+msgstr "Chi deve avere un profilo?"
+
+#: src/Admin/PageContent.php:128
+msgid "canonical profile URL."
+msgstr "URL canonico del profilo."
+
+#: src/Admin/PageContent.php:126
+msgid "current WordPress profile user."
+msgstr "utente WordPress del profilo corrente."
+
+#: src/Admin/PageContent.php:127
+msgid "current profile user ID."
+msgstr "ID dell’utente del profilo corrente."
+
+#: src/Admin/PageContent.php:129
+msgid "profile visibility check."
+msgstr "verifica della visibilità del profilo."
+
+#: core-blueprint-profiles.php:33
+#, php-format
+msgid "requires PHP 8.4 or higher. This server runs PHP %s."
+msgstr "richiede PHP 8.4 o versione successiva. Questo server esegue PHP%s."
+
+#: src/Admin/PageContent.php:125
+msgid "whether the current request is a profile."
+msgstr "se la richiesta corrente corrisponde a un profilo."

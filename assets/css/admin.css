@@ -1,26 +1,23 @@
-/** Core Blueprint Profiles admin layout. Shared Base components own the visual system. */
+/** Core Blueprint Profiles admin composition. Base owns presentation primitives. */
 .cb-core-wrap .cb-profiles-tab-panel[hidden],
 .cb-core-wrap [data-cb-profiles-behavior][hidden],
-.cb-core-wrap [data-cb-profiles-template][hidden] { display: none; }
-.cb-core-wrap .cb-profiles-fields { display: grid; gap: var(--cb-space-5, 24px); }
-.cb-core-wrap .cb-profiles-role-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--cb-space-3, 12px) var(--cb-space-5, 24px); margin-top: var(--cb-space-3, 12px); }
-.cb-core-wrap .cb-profiles-role-grid label { display: flex; align-items: center; gap: var(--cb-space-2, 8px); }
-.cb-core-wrap .cb-profiles-role-grid code { margin-left: auto; color: var(--cb-text-muted, inherit); }
-.cb-core-wrap .cb-profiles-inline-checks { display: flex; flex-wrap: wrap; gap: var(--cb-space-4, 16px); }
-.cb-core-wrap .cb-profiles-tab-panel .submit { margin-bottom: 0; }
-@media (max-width: 782px) { .cb-core-wrap .cb-profiles-role-grid { grid-template-columns: 1fr; } }
-
-/* Guided settings flow. Visual values come from Core Blueprint Base tokens. */
-.cb-core-wrap .cb-profiles-tab-panel > .cb-core-card + .cb-core-card {
-	margin-top: var(--cb-space-5, 24px);
-}
+.cb-core-wrap [data-cb-profiles-template][hidden],
 .cb-core-wrap [data-cb-profiles-context][hidden] {
 	display: none;
 }
+
+/* Field Foundation owns vertical rhythm; feature CSS only trims terminal gaps. */
+.cb-core-wrap .cb-profiles-fields > .cb-core-field:last-child,
+.cb-core-wrap [data-cb-profiles-behavior] > .cb-core-field:last-child,
+.cb-core-wrap [data-cb-profiles-template] > .cb-core-field:last-child {
+	margin-bottom: 0;
+}
+
 .cb-core-wrap .is-context-disabled {
 	opacity: 0.5;
 	transition: opacity 120ms ease;
 }
+
 .cb-core-wrap .cb-profiles-url-examples {
 	display: flex;
 	flex-wrap: wrap;
@@ -28,38 +25,48 @@
 	margin-top: var(--cb-space-3, 12px);
 	color: var(--cb-text-muted, inherit);
 }
+
 .cb-core-wrap .cb-profiles-url-examples span {
 	display: inline-flex;
 	align-items: center;
 	gap: var(--cb-space-2, 8px);
 }
+
 .cb-core-wrap .cb-profiles-role-disclosure {
 	margin-top: var(--cb-space-4, 16px);
+}
+
+.cb-core-wrap .cb-profiles-role-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: var(--cb-space-3, 12px) var(--cb-space-5, 24px);
+	margin-top: var(--cb-space-3, 12px);
+}
+
+.cb-core-wrap .cb-profiles-role-grid label {
+	display: flex;
+	align-items: center;
+	gap: var(--cb-space-2, 8px);
+	min-width: 0;
+}
+
+.cb-core-wrap .cb-profiles-role-grid code {
+	margin-left: auto;
+	color: var(--cb-text-muted, inherit);
+}
+
+.cb-core-wrap .cb-profiles-tab-panel .submit {
 	margin-bottom: 0;
 }
-.cb-core-wrap .cb-profiles-role-disclosure .cb-core-module-header {
-	grid-template-columns: minmax(0, 1fr) auto;
-	align-items: center;
+
+.cb-core-wrap .cb-profiles-divider {
+	margin: var(--cb-space-4, 16px) 0;
+	border: 0;
+	border-top: 1px solid var(--cb-border);
 }
-.cb-core-wrap .cb-profiles-role-disclosure.is-expanded .cb-core-module-header {
-	border-bottom-color: var(--cb-surface-3, currentColor);
-}
-.cb-core-wrap .cb-profiles-role-disclosure .cb-core-module-body {
-	display: grid;
-	grid-template-rows: 0fr;
-	transition: grid-template-rows 200ms ease;
-}
-.cb-core-wrap .cb-profiles-role-disclosure.is-expanded .cb-core-module-body {
-	grid-template-rows: 1fr;
-}
-.cb-core-wrap .cb-profiles-role-disclosure .cb-core-module-body > * {
-	min-height: 0;
-	overflow: hidden;
-}
-.cb-core-wrap .cb-profiles-role-disclosure .cb-core-module-body > div > .cb-profiles-role-grid {
-	padding: var(--cb-space-4, 16px) var(--cb-space-5, 24px);
-	margin-top: 0;
-}
-.cb-core-wrap .cb-profiles-role-disclosure:not(.is-expanded) .cb-core-chevron {
-	transform: rotate(-90deg);
+
+@media (max-width: 782px) {
+	.cb-core-wrap .cb-profiles-role-grid {
+		grid-template-columns: 1fr;
+	}
 }

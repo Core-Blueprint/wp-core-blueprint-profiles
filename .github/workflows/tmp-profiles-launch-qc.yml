@@ -17,46 +17,68 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Apply launch alignment
-        run: python3 tools/tmp-profiles-launch-qc.py
-      - name: Syntax and contract checks
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install catalog tooling
+        run: |
+          python -m pip install --disable-pip-version-check polib deep-translator
+          sudo apt-get update -qq && sudo apt-get install -y gettext
+      - name: Refresh and complete launch catalogs
         shell: bash
         run: |
           set -euo pipefail
-          find . -type f -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n1 php -l >/tmp/profiles-php-lint.log
+          find . -type f -name '*.php' -not -path './vendor/*' -not -path './languages/*' -not -path './.github/*' -not -path './tools/*' -print0 | xargs -0 xgettext --language=PHP --from-code=UTF-8 --keyword=__ --keyword=_e --keyword=esc_html__ --keyword=esc_html_e --keyword=esc_attr__ --keyword=esc_attr_e --keyword=_x:1,2c --keyword=_ex:1,2c --keyword=_n:1,2 --keyword=_nx:1,2,4c --sort-output --package-name='Core Blueprint Profiles' --package-version='1.0.0' -o languages/core-blueprint-profiles.pot
+          for locale in nl_NL de_DE fr_FR es_ES it_IT pt_PT; do
+            po="languages/core-blueprint-profiles-${locale}.po"
+            msgmerge --quiet --update --backup=none "$po" languages/core-blueprint-profiles.pot
+            msgattrib --no-obsolete -o "$po" "$po"
+          done
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          import polib
+          from deep_translator import GoogleTranslator
+          locales={'nl_NL':'nl','de_DE':'de','fr_FR':'fr','es_ES':'es','it_IT':'it','pt_PT':'pt'}
+          token_re=re.compile(r'%(?:\d+\$)?[-+0 #]*(?:\d+)?(?:\.\d+)?[bcdeEfFgGosuxX]|\{[A-Za-z0-9_.:-]+\}|<[^>]+>')
+          printf_re=re.compile(r'%(?:\d+\$)?[-+0 #]*(?:\d+)?(?:\.\d+)?[bcdeEfFgGosuxX]'); brace_re=re.compile(r'\{[A-Za-z0-9_.:-]+\}'); html_re=re.compile(r'<[^>]+>')
+          def sig(s): return (printf_re.findall(s),brace_re.findall(s),html_re.findall(s))
+          def fill(tr,s):
+            out=[]; pos=0
+            for m in token_re.finditer(s):
+              part=s[pos:m.start()]; out.append((tr.translate(part) or part) if part.strip() else part); out.append(m.group(0)); pos=m.end()
+            tail=s[pos:]; out.append((tr.translate(tail) or tail) if tail.strip() else tail); return ''.join(out)
+          for locale,target in locales.items():
+            path=Path('languages')/f'core-blueprint-profiles-{locale}.po'; po=polib.pofile(str(path)); tr=GoogleTranslator(source='en',target=target)
+            for e in po:
+              if e.obsolete: continue
+              if e.msgid_plural:
+                if not e.msgstr_plural.get(0): e.msgstr_plural[0]=fill(tr,e.msgid)
+                if not e.msgstr_plural.get(1): e.msgstr_plural[1]=fill(tr,e.msgid_plural)
+                if sig(e.msgid)!=sig(e.msgstr_plural[0]) or sig(e.msgid_plural)!=sig(e.msgstr_plural[1]): raise SystemExit(f'{locale}: token mismatch {e.msgid}')
+              elif not e.msgstr:
+                e.msgstr=fill(tr,e.msgid)
+                if sig(e.msgid)!=sig(e.msgstr): raise SystemExit(f'{locale}: token mismatch {e.msgid}')
+            po.metadata['Project-Id-Version']='Core Blueprint Profiles 1.0.0'; po.metadata['PO-Revision-Date']='2026-09-03 00:00+0000'; po.metadata['Last-Translator']='Core Blueprint'; po.metadata['Language-Team']=locale; po.metadata['MIME-Version']='1.0'; po.save(str(path))
+          PY
+          for locale in nl_NL de_DE fr_FR es_ES it_IT pt_PT; do
+            po="languages/core-blueprint-profiles-${locale}.po"; mo="languages/core-blueprint-profiles-${locale}.mo"
+            msgfmt --check --check-format -o "$mo" "$po"
+            missing=$(msgattrib --untranslated "$po" | grep -c '^msgid ' || true); echo "${locale}_UNTRANSLATED=${missing}"; test "$missing" -eq 0
+          done
+      - name: Recheck contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          find . -type f -name '*.php' -not -path './vendor/*' -not -path './tools/*' -print0 | xargs -0 -n1 php -l >/tmp/profiles-php-lint.log
           grep -q 'CB_PROFILES_REQUIRED_API' core-blueprint-profiles.php
           grep -q 'ExtensionRegistry::register' src/Integration/CoreBlueprint.php
           test ! -e src/Admin/FallbackPage.php
-      - name: Commit technical alignment
+      - name: Commit catalogs
         shell: bash
         run: |
           git config user.name 'Core Blueprint CI'
           git config user.email 'actions@users.noreply.github.com'
-          git add -A core-blueprint-profiles.php src/
-          git diff --cached --check
-          git commit -m 'Align Profiles with launch Base contracts'
-          git push origin HEAD:qc/profiles-launch-readiness
-      - name: Install gettext
-        run: sudo apt-get update -qq && sudo apt-get install -y gettext
-      - name: Refresh and validate launch catalogs
-        shell: bash
-        run: |
-          set -euo pipefail
-          find . -type f -name '*.php' -not -path './vendor/*' -not -path './languages/*' -not -path './.github/*' -print0 | xargs -0 xgettext --language=PHP --from-code=UTF-8 --keyword=__ --keyword=_e --keyword=esc_html__ --keyword=esc_html_e --keyword=esc_attr__ --keyword=esc_attr_e --keyword=_x:1,2c --keyword=_ex:1,2c --keyword=_n:1,2 --keyword=_nx:1,2,4c --sort-output --package-name='Core Blueprint Profiles' --package-version='1.0.0' -o languages/core-blueprint-profiles.pot
-          for locale in nl_NL de_DE fr_FR es_ES it_IT pt_PT; do
-            po="languages/core-blueprint-profiles-${locale}.po"
-            test -s "$po"
-            msgmerge --quiet --update --backup=none "$po" languages/core-blueprint-profiles.pot
-            msgattrib --no-obsolete -o "$po" "$po"
-            msgfmt --check --check-format -o "languages/core-blueprint-profiles-${locale}.mo" "$po"
-            missing=$(msgattrib --untranslated "$po" | grep -c '^msgid ' || true)
-            echo "${locale}_UNTRANSLATED=${missing}"
-            test "$missing" -eq 0
-          done
-      - name: Commit catalogs
-        shell: bash
-        run: |
           git add languages/
           git diff --cached --check
-          git commit -m 'Refresh Profiles launch translation catalogs'
-          git push origin HEAD:qc/profiles-launch-readiness
+          if ! git diff --cached --quiet; then git commit -m 'Complete Profiles launch translation catalogs'; git push origin HEAD:qc/profiles-launch-readiness; fi

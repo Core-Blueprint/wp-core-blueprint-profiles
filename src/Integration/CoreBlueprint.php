@@ -95,11 +95,11 @@ final class CoreBlueprint {
 	}
 
 	public static function register_page(): void {
-		if ( class_exists( '\\CB\\Core\\Admin\\PageRegistry' ) && class_exists( '\\CB\\Core\\Admin\\PageBase' ) ) {
+		if ( class_exists( '\CB\Core\Admin\PageRegistry' ) && class_exists( '\CB\Core\Admin\PageBase' ) ) {
 			\CB\Core\Admin\PageRegistry::register(
 				new CoreBlueprintPage(),
 				[
-					'components' => [ 'nav-tabs', 'cards', 'fields', 'form-controls' ],
+					'components' => [ 'nav-tabs', 'cards', 'fields', 'form-controls', 'disclosure' ],
 				]
 			);
 		}

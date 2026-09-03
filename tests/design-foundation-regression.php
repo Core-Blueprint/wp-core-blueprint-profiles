@@ -21,7 +21,7 @@ $checks = [
 	'old module disclosure markup is absent'     => ! str_contains( $page, 'cb-core-module' ) && ! str_contains( $page, 'cb-core-module-collapse' ),
 	'old module disclosure CSS is absent'        => ! str_contains( $css, '.cb-core-module' ) && ! str_contains( $css, '.cb-core-chevron' ),
 	'old custom disclosure JS is absent'         => ! str_contains( $js, 'setRolesExpanded' ) && ! str_contains( $js, 'data-cb-profiles-role-toggle' ),
-	'ordinary checkbox is not enable variant'    => str_contains( $page, "$classes = 'cb-core-field' . ( $enabled_control ? ' cb-core-field--enable' : '' );" ),
+	'ordinary checkbox is not enable variant'    => str_contains( $page, '$classes = \'cb-core-field\' . ( $enabled_control ? \' cb-core-field--enable\' : \'\' );' ),
 	'feature CSS does not redefine Base colors'  => ! preg_match( '/--cb-(?:surface|text|border|accent|success|warning|danger)\s*:/', $css ),
 	'feature CSS does not restyle Base buttons'  => ! str_contains( $css, '.button-primary' ) && ! str_contains( $css, '.cb-core-button' ),
 ];

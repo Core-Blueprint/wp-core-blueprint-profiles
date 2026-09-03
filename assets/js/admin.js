@@ -66,28 +66,12 @@
 	syncProfileState();
 
 	const roleDisclosure = document.querySelector('[data-cb-profiles-role-disclosure]');
-	const roleToggle = roleDisclosure?.querySelector('[data-cb-profiles-role-toggle]');
-	const roleBody = roleDisclosure?.querySelector('.cb-core-module-body');
 	const roleCount = roleDisclosure?.querySelector('[data-cb-profiles-role-count]');
 	const roleCheckboxes = [...(roleDisclosure?.querySelectorAll('[data-cb-profiles-role-checkbox]') || [])];
-
 	const syncRoleCount = () => {
 		if (roleCount) roleCount.textContent = String(roleCheckboxes.filter((checkbox) => checkbox.checked).length);
 	};
-	const setRolesExpanded = (expanded) => {
-		if (!roleDisclosure || !roleToggle || !roleBody) return;
-		roleDisclosure.classList.toggle('is-expanded', expanded);
-		roleToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-		roleBody.setAttribute('aria-hidden', expanded ? 'false' : 'true');
-		if (expanded) roleBody.removeAttribute('inert');
-		else roleBody.setAttribute('inert', '');
-	};
 
-	roleToggle?.addEventListener('click', (event) => {
-		event.stopPropagation();
-		setRolesExpanded(!roleDisclosure.classList.contains('is-expanded'));
-	});
 	roleCheckboxes.forEach((checkbox) => checkbox.addEventListener('change', syncRoleCount));
 	syncRoleCount();
-	setRolesExpanded(false);
 })();

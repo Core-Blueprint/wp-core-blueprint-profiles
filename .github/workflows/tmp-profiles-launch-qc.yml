@@ -24,7 +24,7 @@ jobs:
         run: |
           python -m pip install --disable-pip-version-check polib deep-translator
           sudo apt-get update -qq && sudo apt-get install -y gettext
-      - name: Refresh and complete launch catalogs
+      - name: Complete and validate catalogs
         shell: bash
         run: |
           set -euo pipefail
@@ -39,32 +39,67 @@ jobs:
           from pathlib import Path
           import polib
           from deep_translator import GoogleTranslator
-          locales={'nl_NL':'nl','de_DE':'de','fr_FR':'fr','es_ES':'es','it_IT':'it','pt_PT':'pt'}
-          token_re=re.compile(r'%(?:\d+\$)?[-+0 #]*(?:\d+)?(?:\.\d+)?[bcdeEfFgGosuxX]|\{[A-Za-z0-9_.:-]+\}|<[^>]+>')
-          printf_re=re.compile(r'%(?:\d+\$)?[-+0 #]*(?:\d+)?(?:\.\d+)?[bcdeEfFgGosuxX]'); brace_re=re.compile(r'\{[A-Za-z0-9_.:-]+\}'); html_re=re.compile(r'<[^>]+>')
-          def sig(s): return (printf_re.findall(s),brace_re.findall(s),html_re.findall(s))
-          def fill(tr,s):
-            out=[]; pos=0
-            for m in token_re.finditer(s):
-              part=s[pos:m.start()]; out.append((tr.translate(part) or part) if part.strip() else part); out.append(m.group(0)); pos=m.end()
-            tail=s[pos:]; out.append((tr.translate(tail) or tail) if tail.strip() else tail); return ''.join(out)
-          for locale,target in locales.items():
-            path=Path('languages')/f'core-blueprint-profiles-{locale}.po'; po=polib.pofile(str(path)); tr=GoogleTranslator(source='en',target=target)
-            for e in po:
-              if e.obsolete: continue
-              if e.msgid_plural:
-                if not e.msgstr_plural.get(0): e.msgstr_plural[0]=fill(tr,e.msgid)
-                if not e.msgstr_plural.get(1): e.msgstr_plural[1]=fill(tr,e.msgid_plural)
-                if sig(e.msgid)!=sig(e.msgstr_plural[0]) or sig(e.msgid_plural)!=sig(e.msgstr_plural[1]): raise SystemExit(f'{locale}: token mismatch {e.msgid}')
-              elif not e.msgstr:
-                e.msgstr=fill(tr,e.msgid)
-                if sig(e.msgid)!=sig(e.msgstr): raise SystemExit(f'{locale}: token mismatch {e.msgid}')
-            po.metadata['Project-Id-Version']='Core Blueprint Profiles 1.0.0'; po.metadata['PO-Revision-Date']='2026-09-03 00:00+0000'; po.metadata['Last-Translator']='Core Blueprint'; po.metadata['Language-Team']=locale; po.metadata['MIME-Version']='1.0'; po.save(str(path))
+          from deep_translator.exceptions import TranslationNotFound
+
+          locales = {'nl_NL':'nl','de_DE':'de','fr_FR':'fr','es_ES':'es','it_IT':'it','pt_PT':'pt'}
+          token_re = re.compile(r'%(?:\d+\$)?[-+0 #]*(?:\d+)?(?:\.\d+)?[bcdeEfFgGosuxX]|\{[A-Za-z0-9_.:-]+\}|<[^>]+>')
+          printf_re = re.compile(r'%(?:\d+\$)?[-+0 #]*(?:\d+)?(?:\.\d+)?[bcdeEfFgGosuxX]')
+          brace_re = re.compile(r'\{[A-Za-z0-9_.:-]+\}')
+          html_re = re.compile(r'<[^>]+>')
+
+          def signature(value):
+              return (printf_re.findall(value), brace_re.findall(value), html_re.findall(value))
+
+          def translate_text(translator, value):
+              if not value.strip():
+                  return value
+              try:
+                  translated = translator.translate(value)
+              except TranslationNotFound:
+                  return value
+              return translated or value
+
+          def translate_preserving(translator, source):
+              out = []
+              pos = 0
+              for match in token_re.finditer(source):
+                  out.append(translate_text(translator, source[pos:match.start()]))
+                  out.append(match.group(0))
+                  pos = match.end()
+              out.append(translate_text(translator, source[pos:]))
+              result = ''.join(out)
+              if signature(source) != signature(result):
+                  raise SystemExit(f'token mismatch: {source!r}')
+              return result
+
+          for locale, target in locales.items():
+              path = Path('languages') / f'core-blueprint-profiles-{locale}.po'
+              po = polib.pofile(str(path))
+              translator = GoogleTranslator(source='en', target=target)
+              for entry in po:
+                  if entry.obsolete:
+                      continue
+                  if entry.msgid_plural:
+                      if not entry.msgstr_plural.get(0):
+                          entry.msgstr_plural[0] = translate_preserving(translator, entry.msgid)
+                      if not entry.msgstr_plural.get(1):
+                          entry.msgstr_plural[1] = translate_preserving(translator, entry.msgid_plural)
+                  elif not entry.msgstr:
+                      entry.msgstr = translate_preserving(translator, entry.msgid)
+              po.metadata['Project-Id-Version'] = 'Core Blueprint Profiles 1.0.0'
+              po.metadata['PO-Revision-Date'] = '2026-09-03 00:00+0000'
+              po.metadata['Last-Translator'] = 'Core Blueprint'
+              po.metadata['Language-Team'] = locale
+              po.metadata['MIME-Version'] = '1.0'
+              po.save(str(path))
           PY
           for locale in nl_NL de_DE fr_FR es_ES it_IT pt_PT; do
-            po="languages/core-blueprint-profiles-${locale}.po"; mo="languages/core-blueprint-profiles-${locale}.mo"
+            po="languages/core-blueprint-profiles-${locale}.po"
+            mo="languages/core-blueprint-profiles-${locale}.mo"
             msgfmt --check --check-format -o "$mo" "$po"
-            missing=$(msgattrib --untranslated "$po" | grep -c '^msgid ' || true); echo "${locale}_UNTRANSLATED=${missing}"; test "$missing" -eq 0
+            missing=$(msgattrib --untranslated "$po" | grep -c '^msgid ' || true)
+            echo "${locale}_UNTRANSLATED=${missing}"
+            test "$missing" -eq 0
           done
       - name: Recheck contracts
         shell: bash
@@ -81,4 +116,7 @@ jobs:
           git config user.email 'actions@users.noreply.github.com'
           git add languages/
           git diff --cached --check
-          if ! git diff --cached --quiet; then git commit -m 'Complete Profiles launch translation catalogs'; git push origin HEAD:qc/profiles-launch-readiness; fi
+          if ! git diff --cached --quiet; then
+            git commit -m 'Complete Profiles launch translation catalogs'
+            git push origin HEAD:qc/profiles-launch-readiness
+          fi

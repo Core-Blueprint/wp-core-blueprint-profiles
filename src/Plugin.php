@@ -3,7 +3,6 @@ declare(strict_types=1);
 namespace CB\Profiles;
 
 use CB\Profiles\Admin\Assets;
-use CB\Profiles\Admin\FallbackPage;
 use CB\Profiles\Integration\CoreBlueprint;
 use CB\Profiles\Integration\Likes;
 
@@ -18,7 +17,6 @@ final class Plugin {
 		}
 		self::$booted = true;
 
-		load_plugin_textdomain( 'core-blueprint-profiles', false, dirname( CB_PROFILES_BASENAME ) . '/languages' );
 		Install::maybe_upgrade();
 		add_action( 'admin_init', [ __CLASS__, 'register_settings' ] );
 		add_filter( 'option_page_capability_cb_profiles_settings_group', static fn(): string => Capabilities::MANAGE );
@@ -28,7 +26,6 @@ final class Plugin {
 		DeniedRenderer::init();
 		UserProfile::init();
 		CoreBlueprint::init();
-		FallbackPage::init();
 		Assets::init();
 		Likes::init();
 

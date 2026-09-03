@@ -1,0 +1,32 @@
+name: Temporary Profiles Foundation QC
+
+on:
+  push:
+    branches:
+      - fix/profiles-settings-foundation
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  foundation-qc:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+      - name: Lint changed PHP
+        run: |
+          php -l src/Integration/CoreBlueprint.php
+          php -l src/Admin/PageContent.php
+          php -l tests/design-foundation-regression.php
+          php -l tests/dashboard-health-regression.php
+      - name: Run Design Foundation regression
+        run: php tests/design-foundation-regression.php
+      - name: Run dashboard health regression
+        run: php tests/dashboard-health-regression.php
+      - name: Check admin JavaScript syntax
+        run: node --check assets/js/admin.js

@@ -1,0 +1,37 @@
+name: Temporary Profiles Dashboard Health QC
+
+on:
+  push:
+    branches:
+      - fix/profiles-dashboard-health
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  health-qc:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+      - name: Lint changed PHP
+        run: |
+          php -l core-blueprint-profiles.php
+          php -l src/Plugin.php
+          php -l src/Integration/CoreBlueprint.php
+          php -l tests/dashboard-health-regression.php
+      - name: Run dashboard health regression
+        run: php tests/dashboard-health-regression.php
+      - name: Verify reused translated health copy
+        run: |
+          for file in languages/core-blueprint-profiles.pot languages/*.po; do
+            grep -Fq 'msgid "Profiles"' "$file"
+            grep -Fq 'msgid "Settings"' "$file"
+            grep -Fq 'msgid "Profile pages are currently disabled."' "$file"
+            grep -Fq 'msgid "Profiles are currently visible to everyone."' "$file"
+            grep -Fq 'msgid "Profiles are limited to logged-in users."' "$file"
+          done

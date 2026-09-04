@@ -12,6 +12,7 @@ Privacy-aware WordPress user profile pages built on native WordPress author arch
 - Administrators can optionally allow users to choose their own unique profile URL.
 - Native WordPress author context: no profile CPT and no custom template engine.
 - Works with themes and page builders that support author archives, including Bricks and Elementor.
+- Optional Bricks adapter for profile dynamic data, member queries and profile-aware conditions; Bricks is never a dependency.
 - Public or logged-in-only profile visibility.
 - Exclude selected WordPress roles from profile pages.
 - Per-user profile-page toggle on the WordPress user edit screen.
@@ -26,7 +27,14 @@ Privacy-aware WordPress user profile pages built on native WordPress author arch
 
 ## Builder usage
 
-Core Blueprint Profiles does not render the public profile itself. Create an Author Archive template in your theme/page builder and use normal WordPress author/user data or ACF user fields.
+Core Blueprint Profiles does not render the public profile itself. Create an Author Archive template in your theme/page builder and use normal WordPress author/user data, ACF user fields, or the builder-neutral Profiles contracts.
+
+When Bricks is active, the optional adapter adds:
+
+- `Core Blueprint Profiles` dynamic data for public profile identity, URL, avatar and biography fields.
+- `Profiles: Members` and `Profiles: Current profile` query types.
+- Profile-aware conditions for profile requests, visibility, ownership, availability and role.
+- Privacy-safe query records that deliberately omit WordPress login, email and `user_nicename` identity fields.
 
 Public helpers:
 

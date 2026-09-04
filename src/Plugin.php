@@ -3,6 +3,7 @@ declare(strict_types=1);
 namespace CB\Profiles;
 
 use CB\Profiles\Admin\Assets;
+use CB\Profiles\Integration\Builders\Bootstrap as BuilderBootstrap;
 use CB\Profiles\Integration\Likes;
 
 defined( 'ABSPATH' ) || exit;
@@ -26,6 +27,7 @@ final class Plugin {
 		UserProfile::init();
 		Assets::init();
 		Likes::init();
+		BuilderBootstrap::init();
 
 		do_action( 'cb_profiles_loaded' );
 	}

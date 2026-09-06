@@ -11,11 +11,7 @@ final class PageContent {
 		$s     = Settings::all();
 		$roles = wp_roles()->roles;
 		?>
-		<div class="wrap cb-core-wrap cb-core-page cb-profiles-settings-page">
-			<p class="cb-core-eyebrow"><?php esc_html_e( 'Core Blueprint', 'core-blueprint-profiles' ); ?></p>
-			<h1 class="cb-core-title"><?php esc_html_e( 'Profiles', 'core-blueprint-profiles' ); ?></h1>
-			<p class="cb-core-intro"><?php esc_html_e( 'Create privacy-aware profile pages for your WordPress users. Choose who can view them, how profile URLs are created, and which users should have a profile.', 'core-blueprint-profiles' ); ?></p>
-
+		<div class="cb-profiles-settings-page">
 			<nav class="cb-core-tab-wrapper cb-profiles-tabs" role="tablist" aria-label="<?php esc_attr_e( 'Profiles settings', 'core-blueprint-profiles' ); ?>" data-cb-profiles-tabs>
 				<button type="button" class="nav-tab nav-tab-active" role="tab" aria-selected="true" aria-controls="cb-profiles-tab-general" id="cb-profiles-tab-general-button" data-cb-profiles-tab="general"><?php esc_html_e( 'General', 'core-blueprint-profiles' ); ?></button>
 				<button type="button" class="nav-tab" role="tab" aria-selected="false" aria-controls="cb-profiles-tab-restricted" id="cb-profiles-tab-restricted-button" data-cb-profiles-tab="restricted"><?php esc_html_e( 'Restricted Access', 'core-blueprint-profiles' ); ?></button>

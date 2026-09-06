@@ -4,7 +4,7 @@ Privacy-aware WordPress user profile pages built on native WordPress author arch
 
 ## v1.0.0
 
-- Guided admin setup for profile availability, visibility, URLs and restricted access under **Core Blueprint → Extensions → Community → Profiles**.
+- Guided admin setup for profile availability, visibility, URLs and restricted access.
 - Configurable profile base slug, e.g. `/profile/k7p4x2n9/` or `/profiel/k7p4x2n9/`.
 - Dedicated public profile slugs are independent from WordPress usernames, login emails and `user_nicename`.
 - Anonymous identifiers are the privacy-friendly default; administrators can instead generate slugs from first/last name or display name.

@@ -5,29 +5,34 @@ namespace CB\Profiles\Integration;
 
 defined( 'ABSPATH' ) || exit;
 
+/** Optional adapter for the central Core Blueprint Updates client. */
 final class Updates {
-	private const PRODUCT_KEY = 'core-blueprint-profiles';
-	private const VENDOR_ID   = 'core-blueprint';
+	public const PRODUCT_KEY = 'core-blueprint-profiles';
+	public const VENDOR_ID   = 'core-blueprint';
+
+	private static bool $registered = false;
 
 	public static function init(): void {
-		add_action( 'cb_updates_register_products', [ self::class, 'register' ] );
+		if ( self::$registered ) {
+			return;
+		}
+		self::$registered = true;
+		add_action( 'cb_updates_register_products', [ self::class, 'register_product' ] );
 	}
 
-	/** @param object $registry Updates product registry. */
-	public static function register( object $registry ): void {
-		if ( ! method_exists( $registry, 'register' ) ) {
+	public static function register_product(): void {
+		$registry = '\\CB\\Updates\\ProductRegistry';
+		if ( ! class_exists( $registry ) ) {
 			return;
 		}
 
-		$registry->register(
-			self::PRODUCT_KEY,
-			[
-				'name'        => 'Core Blueprint Profiles',
-				'plugin'      => CB_PROFILES_BASENAME,
-				'version'     => CB_PROFILES_VERSION,
-				'product_key' => self::PRODUCT_KEY,
-				'vendor_id'   => self::VENDOR_ID,
-			]
-		);
+		$registry::register( [
+			'name'          => 'Core Blueprint Profiles',
+			'plugin'        => CB_PROFILES_BASENAME,
+			'version'       => CB_PROFILES_VERSION,
+			'product_key'   => self::PRODUCT_KEY,
+			'vendor_id'     => self::VENDOR_ID,
+			'software_uuid' => '',
+		] );
 	}
 }

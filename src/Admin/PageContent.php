@@ -2,29 +2,31 @@
 declare(strict_types=1);
 namespace CB\Profiles\Admin;
 
+use CB\Core\Admin\SettingsRegistry;
+use CB\Profiles\Integration\CoreBlueprint;
 use CB\Profiles\Settings;
 
 defined( 'ABSPATH' ) || exit;
 
 final class PageContent {
+	private const TABS = [ 'general', 'restricted', 'usage' ];
+
 	public static function render(): void {
 		$s     = Settings::all();
 		$roles = wp_roles()->roles;
+		$tab   = self::current_tab();
 		?>
-		<div class="wrap cb-core-wrap cb-core-page cb-profiles-settings-page">
-			<p class="cb-core-eyebrow"><?php esc_html_e( 'Core Blueprint', 'core-blueprint-profiles' ); ?></p>
-			<h1 class="cb-core-title"><?php esc_html_e( 'Profiles', 'core-blueprint-profiles' ); ?></h1>
-			<p class="cb-core-intro"><?php esc_html_e( 'Create privacy-aware profile pages for your WordPress users. Choose who can view them, how profile URLs are created, and which users should have a profile.', 'core-blueprint-profiles' ); ?></p>
-
-			<nav class="cb-core-tab-wrapper cb-profiles-tabs" role="tablist" aria-label="<?php esc_attr_e( 'Profiles settings', 'core-blueprint-profiles' ); ?>" data-cb-profiles-tabs>
-				<button type="button" class="nav-tab nav-tab-active" role="tab" aria-selected="true" aria-controls="cb-profiles-tab-general" id="cb-profiles-tab-general-button" data-cb-profiles-tab="general"><?php esc_html_e( 'General', 'core-blueprint-profiles' ); ?></button>
-				<button type="button" class="nav-tab" role="tab" aria-selected="false" aria-controls="cb-profiles-tab-restricted" id="cb-profiles-tab-restricted-button" data-cb-profiles-tab="restricted"><?php esc_html_e( 'Restricted Access', 'core-blueprint-profiles' ); ?></button>
-				<button type="button" class="nav-tab" role="tab" aria-selected="false" aria-controls="cb-profiles-tab-usage" id="cb-profiles-tab-usage-button" data-cb-profiles-tab="usage"><?php esc_html_e( 'Usage', 'core-blueprint-profiles' ); ?></button>
+		<div class="cb-profiles-settings-page">
+			<nav class="cb-core-tab-wrapper cb-profiles-tabs" aria-label="<?php esc_attr_e( 'Profiles settings', 'core-blueprint-profiles' ); ?>">
+				<a href="<?php echo esc_url( self::tab_url( 'general' ) ); ?>" class="nav-tab<?php echo 'general' === $tab ? ' nav-tab-active' : ''; ?>" role="tab" aria-selected="<?php echo 'general' === $tab ? 'true' : 'false'; ?>" aria-controls="cb-profiles-tab-general" id="cb-profiles-tab-general-link"<?php echo 'general' === $tab ? ' aria-current="page"' : ''; ?>><?php esc_html_e( 'General', 'core-blueprint-profiles' ); ?></a>
+				<a href="<?php echo esc_url( self::tab_url( 'restricted' ) ); ?>" class="nav-tab<?php echo 'restricted' === $tab ? ' nav-tab-active' : ''; ?>" role="tab" aria-selected="<?php echo 'restricted' === $tab ? 'true' : 'false'; ?>" aria-controls="cb-profiles-tab-restricted" id="cb-profiles-tab-restricted-link"<?php echo 'restricted' === $tab ? ' aria-current="page"' : ''; ?>><?php esc_html_e( 'Restricted Access', 'core-blueprint-profiles' ); ?></a>
+				<a href="<?php echo esc_url( self::tab_url( 'usage' ) ); ?>" class="nav-tab<?php echo 'usage' === $tab ? ' nav-tab-active' : ''; ?>" role="tab" aria-selected="<?php echo 'usage' === $tab ? 'true' : 'false'; ?>" aria-controls="cb-profiles-tab-usage" id="cb-profiles-tab-usage-link"<?php echo 'usage' === $tab ? ' aria-current="page"' : ''; ?>><?php esc_html_e( 'Usage', 'core-blueprint-profiles' ); ?></a>
 			</nav>
 
 			<form method="post" action="options.php">
 				<?php settings_fields( 'cb_profiles_settings_group' ); ?>
-				<section id="cb-profiles-tab-general" class="cb-profiles-tab-panel" role="tabpanel" aria-labelledby="cb-profiles-tab-general-button" data-cb-profiles-panel="general">
+				<?php wp_referer_field(); ?>
+				<section id="cb-profiles-tab-general" class="cb-profiles-tab-panel" role="tabpanel" aria-labelledby="cb-profiles-tab-general-link"<?php echo 'general' === $tab ? '' : ' hidden'; ?>>
 					<div class="cb-core-card">
 						<header class="cb-core-card__header"><h2 class="cb-core-card__title"><?php esc_html_e( 'Profile pages', 'core-blueprint-profiles' ); ?></h2></header>
 						<div class="cb-core-card__body cb-profiles-fields">
@@ -81,7 +83,7 @@ final class PageContent {
 					<?php submit_button( __( 'Save settings', 'core-blueprint-profiles' ) ); ?>
 				</section>
 
-				<section id="cb-profiles-tab-restricted" class="cb-profiles-tab-panel" role="tabpanel" aria-labelledby="cb-profiles-tab-restricted-button" data-cb-profiles-panel="restricted" hidden>
+				<section id="cb-profiles-tab-restricted" class="cb-profiles-tab-panel" role="tabpanel" aria-labelledby="cb-profiles-tab-restricted-link"<?php echo 'restricted' === $tab ? '' : ' hidden'; ?>>
 					<div class="cb-core-card cb-profiles-context-card">
 						<header class="cb-core-card__header"><h2 class="cb-core-card__title"><?php esc_html_e( 'Restricted Access', 'core-blueprint-profiles' ); ?></h2></header>
 						<div class="cb-core-card__body">
@@ -113,7 +115,7 @@ final class PageContent {
 				</section>
 			</form>
 
-			<section id="cb-profiles-tab-usage" class="cb-profiles-tab-panel" role="tabpanel" aria-labelledby="cb-profiles-tab-usage-button" data-cb-profiles-panel="usage" hidden>
+			<section id="cb-profiles-tab-usage" class="cb-profiles-tab-panel" role="tabpanel" aria-labelledby="cb-profiles-tab-usage-link"<?php echo 'usage' === $tab ? '' : ' hidden'; ?>>
 				<div class="cb-core-card">
 					<header class="cb-core-card__header"><h2 class="cb-core-card__title"><?php esc_html_e( 'Builder and theme usage', 'core-blueprint-profiles' ); ?></h2></header>
 					<div class="cb-core-card__body">
@@ -130,6 +132,19 @@ final class PageContent {
 			</section>
 		</div>
 		<?php
+	}
+
+	private static function current_tab(): string {
+		$tab = isset( $_GET['tab'] )
+			? sanitize_key( (string) wp_unslash( $_GET['tab'] ) )
+			: 'general';
+
+		return in_array( $tab, self::TABS, true ) ? $tab : 'general';
+	}
+
+	private static function tab_url( string $tab ): string {
+		$tab = in_array( $tab, self::TABS, true ) ? $tab : 'general';
+		return SettingsRegistry::url( CoreBlueprint::ID, [ 'tab' => $tab ] );
 	}
 
 	private static function checkbox( string $key, string $label, mixed $checked, string $description, bool $enabled_control = false ): void {

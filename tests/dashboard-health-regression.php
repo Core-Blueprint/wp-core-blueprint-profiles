@@ -15,9 +15,6 @@ namespace {
 	function add_filter( string $hook, callable $callback ): void {
 		$GLOBALS['cb_test_filters'][ $hook ][] = $callback;
 	}
-	function admin_url( string $path = '' ): string {
-		return 'https://example.test/wp-admin/' . ltrim( $path, '/' );
-	}
 	function __( string $text, string $domain = 'default' ): string {
 		return $text;
 	}
@@ -55,6 +52,23 @@ namespace CB\Core {
 	}
 }
 
+namespace CB\Core\Admin {
+	final class SettingsRegistry {
+		public const GROUP_COMMUNITY = 'community';
+		public static array $registered = [];
+		public static function register( string $id, array $definition ): void {
+			self::$registered[ $id ] = $definition;
+		}
+		public static function url( string $extension_id, array $query = [] ): string {
+			$url = 'https://example.test/wp-admin/admin.php?page=core-blueprint-extensions&extension=' . $extension_id;
+			foreach ( $query as $key => $value ) {
+				$url .= '&' . $key . '=' . $value;
+			}
+			return $url;
+		}
+	}
+}
+
 namespace CB\Core\Dashboard {
 	final class CardRegistry {
 		public static array $shortcuts = [];
@@ -69,12 +83,15 @@ namespace {
 	require_once dirname( __DIR__ ) . '/src/Capabilities.php';
 	require_once dirname( __DIR__ ) . '/src/Integration/CoreBlueprint.php';
 
+	use CB\Core\Admin\SettingsRegistry;
 	use CB\Core\Dashboard\CardRegistry;
 	use CB\Core\ExtensionRegistry;
 	use CB\Profiles\Integration\CoreBlueprint;
 
 	CoreBlueprint::init();
 	cb_assert( isset( $GLOBALS['cb_test_actions']['cb_core_register_extensions'] ), 'ExtensionRegistry hook must be registered during lightweight init.' );
+	cb_assert( isset( $GLOBALS['cb_test_actions']['cb_core_register_settings'] ), 'SettingsRegistry hook must be registered during lightweight init.' );
+	cb_assert( ! isset( $GLOBALS['cb_test_actions']['cb_core_register_pages'] ), 'Obsolete PageRegistry hook must not be registered.' );
 	cb_assert( isset( $GLOBALS['cb_test_filters']['cb_core_module_status_definitions'] ), 'Health-provider hook must be registered during lightweight init.' );
 	cb_assert( isset( $GLOBALS['cb_test_actions']['cb_core_dashboard_register_cards'] ), 'Dashboard shortcut hook must be registered during lightweight init.' );
 
@@ -82,14 +99,23 @@ namespace {
 	$registration = ExtensionRegistry::$registered[0] ?? [];
 	cb_assert( 'core-blueprint-profiles' === ( $registration['id'] ?? '' ), 'Profiles extension identity must remain canonical.' );
 	cb_assert( 'profiles' === ( $registration['status_id'] ?? '' ), 'Profiles must declare status_id=profiles.' );
+	cb_assert( str_contains( (string) ( $registration['menu_url'] ?? '' ), 'extension=core-blueprint-profiles' ), 'Extension menu URL must use the canonical Profiles provider.' );
+
+	CoreBlueprint::register_settings_provider();
+	$provider = SettingsRegistry::$registered['core-blueprint-profiles'] ?? [];
+	cb_assert( SettingsRegistry::GROUP_COMMUNITY === ( $provider['group'] ?? '' ), 'Profiles must be registered in the Community settings group.' );
+	cb_assert( 'cb_profiles_manage' === ( $provider['capability'] ?? '' ), 'Settings provider must preserve Profiles capability boundary.' );
+	cb_assert( [ \CB\Profiles\Admin\PageContent::class, 'render' ] === ( $provider['renderer'] ?? null ), 'PageContent must remain the settings renderer.' );
 
 	$definitions = CoreBlueprint::register_status_definition( [] );
 	cb_assert( isset( $definitions['profiles']['provider'] ), 'Profiles must register a matching health provider.' );
+	cb_assert( str_contains( (string) ( $definitions['profiles']['url'] ?? '' ), 'extension=core-blueprint-profiles' ), 'Health definition URL must use the canonical Profiles provider.' );
 
 	$GLOBALS['cb_test_option'] = [ 'enabled' => false ];
 	$status = CoreBlueprint::extension_status();
 	cb_assert( 'off' === $status['state'], 'Disabled profile pages must project off state.' );
 	cb_assert( 'Profile pages are currently disabled.' === $status['detail'], 'Disabled detail must use existing product copy.' );
+	cb_assert( str_contains( $status['url'], 'extension=core-blueprint-profiles' ), 'Health result URL must use the canonical Profiles provider.' );
 
 	$GLOBALS['cb_test_option'] = [ 'enabled' => true, 'visibility' => 'public' ];
 	$status = CoreBlueprint::extension_status();
@@ -105,10 +131,13 @@ namespace {
 	$shortcut = CardRegistry::$shortcuts['core-blueprint-profiles'][0] ?? [];
 	cb_assert( 'settings' === ( $shortcut['id'] ?? '' ), 'Profiles must expose a Settings dashboard shortcut.' );
 	cb_assert( 'cb_profiles_manage' === ( $shortcut['capability'] ?? '' ), 'Settings shortcut must preserve Profiles capability boundary.' );
+	cb_assert( str_contains( (string) ( $shortcut['url'] ?? '' ), 'extension=core-blueprint-profiles' ), 'Settings shortcut must use the canonical Profiles provider.' );
 
 	$bootstrap = file_get_contents( dirname( __DIR__ ) . '/core-blueprint-profiles.php' );
 	$plugin    = file_get_contents( dirname( __DIR__ ) . '/src/Plugin.php' );
 	cb_assert( false !== strpos( $bootstrap, '\\CB\\Profiles\\Integration\\CoreBlueprint::init();' ), 'Suite integration must initialize before the plugins_loaded runtime gate.' );
+	cb_assert( false !== strpos( $bootstrap, '\\CB\\Core\\Admin\\SettingsRegistry' ), 'Profiles Base readiness must require SettingsRegistry.' );
+	cb_assert( false === strpos( $bootstrap, '\\CB\\Core\\Admin\\PageRegistry' ), 'Profiles Base readiness must not require PageRegistry.' );
 	cb_assert( false === strpos( $plugin, 'CoreBlueprint::init();' ), 'Product runtime must not register suite hooks a second time.' );
 
 	fwrite( STDOUT, "Profiles dashboard health regression: PASS\n" );

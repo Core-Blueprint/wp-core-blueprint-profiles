@@ -68,7 +68,7 @@ function cb_profiles_base_ready(): bool {
 	return defined( 'CB_CORE_API_VERSION' )
 		&& cb_profiles_api_compatible( (string) CB_CORE_API_VERSION, CB_PROFILES_REQUIRED_API )
 		&& class_exists( '\\CB\\Core\\ExtensionRegistry' )
-		&& class_exists( '\\CB\\Core\\Admin\\PageRegistry' );
+		&& class_exists( '\\CB\\Core\\Admin\\SettingsRegistry' );
 }
 
 function cb_profiles_activate(): void {

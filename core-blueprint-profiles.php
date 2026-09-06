@@ -94,6 +94,7 @@ add_action( 'plugins_loaded', static function (): void {
 				echo '<div class="notice notice-error"><p><strong>Core Blueprint Profiles:</strong> ';
 				echo esc_html__( 'Core Blueprint Base with API 1.0 or newer is required.', 'core-blueprint-profiles' );
 				echo '</p></div>';
+			} );
 		}
 		return;
 	}

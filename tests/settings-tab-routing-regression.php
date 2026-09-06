@@ -48,16 +48,16 @@ namespace {
 	$tab_url     = new \ReflectionMethod( PageContent::class, 'tab_url' );
 
 	$cases = [
-		[]                        => 'general',
-		[ 'tab' => 'general' ]    => 'general',
-		[ 'tab' => 'restricted' ] => 'restricted',
-		[ 'tab' => 'usage' ]      => 'usage',
-		[ 'tab' => 'whatever' ]   => 'general',
+		[ 'query' => [], 'expected' => 'general' ],
+		[ 'query' => [ 'tab' => 'general' ], 'expected' => 'general' ],
+		[ 'query' => [ 'tab' => 'restricted' ], 'expected' => 'restricted' ],
+		[ 'query' => [ 'tab' => 'usage' ], 'expected' => 'usage' ],
+		[ 'query' => [ 'tab' => 'whatever' ], 'expected' => 'general' ],
 	];
 
-	foreach ( $cases as $query => $expected ) {
-		$_GET = $query;
-		cb_profiles_tab_assert( $expected === $current_tab->invoke( null ), 'Tab routing must resolve to ' . $expected . '.' );
+	foreach ( $cases as $case ) {
+		$_GET = $case['query'];
+		cb_profiles_tab_assert( $case['expected'] === $current_tab->invoke( null ), 'Tab routing must resolve to ' . $case['expected'] . '.' );
 	}
 
 	$restricted_url = (string) $tab_url->invoke( null, 'restricted' );

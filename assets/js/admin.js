@@ -1,25 +1,5 @@
 (() => {
 	'use strict';
-	const tabs = document.querySelector('[data-cb-profiles-tabs]');
-	if (tabs) {
-		const buttons = [...tabs.querySelectorAll('[data-cb-profiles-tab]')];
-		const panels = [...document.querySelectorAll('[data-cb-profiles-panel]')];
-		const activate = (name) => {
-			buttons.forEach((button) => {
-				const active = button.dataset.cbProfilesTab === name;
-				button.classList.toggle('nav-tab-active', active);
-				button.setAttribute('aria-selected', active ? 'true' : 'false');
-			});
-			panels.forEach((panel) => { panel.hidden = panel.dataset.cbProfilesPanel !== name; });
-			try { sessionStorage.setItem('cbProfilesAdminTab', name); } catch (_) {}
-		};
-		buttons.forEach((button) => button.addEventListener('click', () => activate(button.dataset.cbProfilesTab)));
-		try {
-			const stored = sessionStorage.getItem('cbProfilesAdminTab');
-			if (stored && buttons.some((button) => button.dataset.cbProfilesTab === stored)) activate(stored);
-		} catch (_) {}
-	}
-
 	const behavior = document.querySelector('[data-cb-profiles-denied-behavior]');
 	const source = document.querySelector('[data-cb-profiles-template-source]');
 	const syncBehavior = () => {

@@ -2,7 +2,7 @@
 
 Privacy-aware WordPress user profile pages built on native WordPress author archives.
 
-## v1.0.0
+## v1.0.0-rc1
 
 - Guided admin setup for profile availability, visibility, URLs and restricted access.
 - Configurable profile base slug, e.g. `/profile/k7p4x2n9/` or `/profiel/k7p4x2n9/`.

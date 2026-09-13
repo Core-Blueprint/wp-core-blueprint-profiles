@@ -1,8 +1,8 @@
 # Changelog
 
-## 1.0.0 — 2026-08-25
+## 1.0.0-rc1 — 2026-08-25
 
-- Promoted the tested rc4 feature set to the first stable release.
+- Folded the tested rc4 feature set into the shared Core Blueprint pre-launch `1.0.0-rc1` baseline.
 - Hardened public WordPress user REST responses so `slug` and `link` use the privacy-safe Core Blueprint Profiles identity instead of exposing `user_nicename`.
 - No other functional changes from the tested rc4 release candidate.
 

@@ -3,7 +3,7 @@
  * Plugin Name:       Core Blueprint Profiles
  * Plugin URI:        https://coreblueprint.io
  * Description:       Lightweight privacy-aware WordPress profile pages with configurable URLs, visibility and builder-friendly author archives.
- * Version:           1.0.0
+ * Version:           1.0.0-rc1
  * Author:            Core Blueprint
  * Author URI:        https://coreblueprint.io
  * License:           GPL-2.0+
@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'CB_PROFILES_VERSION', '1.0.0' );
+define( 'CB_PROFILES_VERSION', '1.0.0-rc1' );
 define( 'CB_PROFILES_REQUIRED_API', '1.0' );
 define( 'CB_PROFILES_FILE', __FILE__ );
 define( 'CB_PROFILES_DIR', plugin_dir_path( __FILE__ ) );

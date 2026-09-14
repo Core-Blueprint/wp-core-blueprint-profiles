@@ -1,0 +1,11 @@
+{
+  "product": "Core Blueprint Profiles",
+  "domain": "core-blueprint-profiles",
+  "main_file": "core-blueprint-profiles.php",
+  "version_constant": "CB_PROFILES_VERSION",
+  "exclude": ["dist", "vendor", "node_modules", "tests", "tools", "docs", ".git", ".github"],
+  "skip_js": false,
+  "commit_mo": false,
+  "commit_l10n_php": false,
+  "source_paths": ["core-blueprint-profiles.php", "src", "assets"]
+}

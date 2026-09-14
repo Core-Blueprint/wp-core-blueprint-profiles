@@ -1,7 +1,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Core Blueprint Profiles 1.0.0\n"
+"Project-Id-Version: Core Blueprint Profiles 1.0.0-rc1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-03 00:40+0000\n"
 "PO-Revision-Date: 2026-09-03 00:00+0000\n"
@@ -275,23 +275,20 @@ msgid "Profiles: URL format changed"
 msgstr "Profile: URL-Format geändert"
 
 #: src/Support/Audit.php:128
-#, fuzzy
 msgid "Profiles: base URL changed"
-msgstr "Basispfad für Profile"
+msgstr "Profiles: Basis-URL geändert"
 
 #: src/Support/Audit.php:131
 msgid "Profiles: excluded roles changed"
 msgstr "Profile: Ausgeschlossene Rollen geändert"
 
 #: src/Support/Audit.php:126
-#, fuzzy
 msgid "Profiles: profile pages disabled"
-msgstr "Profilseiten sind derzeit deaktiviert."
+msgstr "Profiles: Profilseiten deaktiviert"
 
 #: src/Support/Audit.php:125
-#, fuzzy
 msgid "Profiles: profile pages enabled"
-msgstr "Profilseiten aktivieren"
+msgstr "Profiles: Profilseiten aktiviert"
 
 #: src/Support/Audit.php:132
 msgid "Profiles: restricted access settings changed"
@@ -310,19 +307,16 @@ msgid "Profiles: user profile URL rotated for privacy"
 msgstr "Profile: Benutzerprofil-URL aus Datenschutzgründen gedreht"
 
 #: src/Support/Audit.php:134
-#, fuzzy
 msgid "Profiles: user profile disabled"
-msgstr "Profilseiten sind derzeit deaktiviert."
+msgstr "Profiles: Benutzerprofil deaktiviert"
 
 #: src/Support/Audit.php:133
-#, fuzzy
 msgid "Profiles: user profile enabled"
-msgstr "Profilseite dieses Benutzers aktivieren"
+msgstr "Profiles: Benutzerprofil aktiviert"
 
 #: src/Support/Audit.php:127
-#, fuzzy
 msgid "Profiles: visibility changed"
-msgstr "Prüfung der Profilsichtbarkeit."
+msgstr "Profiles: Sichtbarkeit geändert"
 
 #: src/Admin/PageContent.php:100
 msgid "Redirect"
@@ -470,7 +464,7 @@ msgstr "Prüfung der Profilsichtbarkeit."
 #: core-blueprint-profiles.php:33
 #, php-format
 msgid "requires PHP 8.4 or higher. This server runs PHP %s."
-msgstr "erfordert PHP 8.4 oder höher. Auf diesem Server läuft PHP%s."
+msgstr "erfordert PHP 8.4 oder höher. Auf diesem Server läuft PHP %s."
 
 #: src/Admin/PageContent.php:125
 msgid "whether the current request is a profile."

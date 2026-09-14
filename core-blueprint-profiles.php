@@ -36,7 +36,7 @@ if ( version_compare( PHP_VERSION, CB_PROFILES_MIN_PHP, '<' ) ) {
 		}
 		deactivate_plugins( CB_PROFILES_BASENAME );
 		wp_die(
-			esc_html( sprintf( 'Core Blueprint Profiles requires PHP 8.4 or higher. This server runs PHP %s.', PHP_VERSION ) ),
+			esc_html( sprintf( __( 'requires PHP 8.4 or higher. This server runs PHP %s.', 'core-blueprint-profiles' ), PHP_VERSION ) ),
 			esc_html( 'Core Blueprint requirements not met' ),
 			[ 'back_link' => true ]
 		);

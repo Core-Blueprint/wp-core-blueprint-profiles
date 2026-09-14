@@ -1,7 +1,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Core Blueprint Profiles 1.0.0\n"
+"Project-Id-Version: Core Blueprint Profiles 1.0.0-rc1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-03 00:40+0000\n"
 "PO-Revision-Date: 2026-09-03 00:00+0000\n"
@@ -60,9 +60,8 @@ msgid "Choose who can open an enabled user profile."
 msgstr "Choisissez qui peut ouvrir un profil utilisateur activé."
 
 #: src/Admin/PageContent.php:16
-#, fuzzy
 msgid "Core Blueprint"
-msgstr "Core Blueprint Profiles"
+msgstr "Core Blueprint"
 
 #: core-blueprint-profiles.php:91
 msgid "Core Blueprint Base with API 1.0 or newer is required."
@@ -473,7 +472,7 @@ msgstr "vérification de la visibilité du profil."
 #: core-blueprint-profiles.php:33
 #, php-format
 msgid "requires PHP 8.4 or higher. This server runs PHP %s."
-msgstr "nécessite PHP 8.4 ou supérieur. Ce serveur exécute PHP%s."
+msgstr "nécessite PHP 8.4 ou supérieur. Ce serveur exécute PHP %s."
 
 #: src/Admin/PageContent.php:125
 msgid "whether the current request is a profile."

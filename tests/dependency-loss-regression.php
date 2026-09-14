@@ -46,9 +46,10 @@ $expect( false === cb_profiles_can_view_profile( 1 ), 'Public visibility helper 
 $expect( false === cb_profiles_is_profile(), 'Public profile-request helper must fail closed.' );
 
 $before = count( $GLOBALS['cb_profiles_test_hooks'] );
+\CB\Profiles\Integration\CoreBlueprint::init();
 \CB\Profiles\Integration\Updates::init();
 \CB\Profiles\Plugin::boot();
-$expect( $before === count( $GLOBALS['cb_profiles_test_hooks'] ), 'Direct Updates init and Plugin boot must remain inert without Base.' );
+$expect( $before === count( $GLOBALS['cb_profiles_test_hooks'] ), 'Direct Base/Updates integration and Plugin boot must remain inert without Base.' );
 $expect( 0 === $GLOBALS['cb_profiles_forbidden_calls'], 'No WordPress profile/user access may escape the readiness gate.' );
 
 echo "Profiles dependency-loss regression PASS\n";

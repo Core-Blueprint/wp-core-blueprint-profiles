@@ -2,6 +2,7 @@
 /**
  * Plugin Name:       Core Blueprint Profiles
  * Plugin URI:        https://coreblueprint.io
+ * Update URI:        https://coreblueprint.io/
  * Description:       Lightweight privacy-aware WordPress profile pages with configurable URLs, visibility and builder-friendly author archives.
  * Version:           1.0.0-rc1
  * Author:            Core Blueprint
@@ -49,9 +50,10 @@ spl_autoload_register( static function ( string $class ): void {
 	}
 } );
 
-// First-party suite identity and health must be registered independently of
-// the heavier Profiles runtime gate below.
+// First-party suite identity, health and update identity remain available
+// independently of the heavier Profiles runtime gate below.
 \CB\Profiles\Integration\CoreBlueprint::init();
+\CB\Profiles\Integration\Updates::init();
 
 add_action( 'init', static function (): void {
 	load_plugin_textdomain( 'core-blueprint-profiles', false, dirname( CB_PROFILES_BASENAME ) . '/languages' );

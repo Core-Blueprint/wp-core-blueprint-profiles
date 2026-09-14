@@ -17,7 +17,7 @@ final class CoreBlueprint {
 	private static bool $initialized = false;
 
 	public static function init(): void {
-		if ( self::$initialized ) {
+		if ( ! self::runtime_ready() || self::$initialized ) {
 			return;
 		}
 		self::$initialized = true;
@@ -30,7 +30,7 @@ final class CoreBlueprint {
 	}
 
 	public static function register_extension(): void {
-		if ( ! class_exists( ExtensionRegistry::class ) || ! class_exists( SettingsRegistry::class ) ) {
+		if ( ! self::runtime_ready() || ! class_exists( ExtensionRegistry::class ) || ! class_exists( SettingsRegistry::class ) ) {
 			return;
 		}
 
@@ -44,7 +44,7 @@ final class CoreBlueprint {
 	}
 
 	public static function register_settings_provider(): void {
-		if ( ! class_exists( SettingsRegistry::class ) ) {
+		if ( ! self::runtime_ready() || ! class_exists( SettingsRegistry::class ) ) {
 			return;
 		}
 
@@ -67,6 +67,9 @@ final class CoreBlueprint {
 	 *  @return array<string,array<string,mixed>>
 	 */
 	public static function register_status_definition( array $definitions ): array {
+		if ( ! self::runtime_ready() || ! class_exists( SettingsRegistry::class ) ) {
+			return $definitions;
+		}
 		$definitions['profiles'] = [
 			'provider' => [ __CLASS__, 'extension_status' ],
 			'label'    => __( 'Profiles', 'core-blueprint-profiles' ),
@@ -77,6 +80,14 @@ final class CoreBlueprint {
 
 	/** @return array{state:string,detail:string,url:string} */
 	public static function extension_status(): array {
+		if ( ! self::runtime_ready() || ! class_exists( SettingsRegistry::class ) ) {
+			return [
+				'state'  => 'off',
+				'detail' => function_exists( 'cb_profiles_dependency_message' ) ? \cb_profiles_dependency_message() : 'Core Blueprint Profiles runtime is unavailable.',
+				'url'    => '',
+			];
+		}
+
 		$settings = Settings::all();
 		$url      = SettingsRegistry::url( self::ID );
 
@@ -104,7 +115,7 @@ final class CoreBlueprint {
 	}
 
 	public static function register_dashboard_shortcuts(): void {
-		if ( ! class_exists( CardRegistry::class ) || ! class_exists( SettingsRegistry::class ) ) {
+		if ( ! self::runtime_ready() || ! class_exists( CardRegistry::class ) || ! class_exists( SettingsRegistry::class ) ) {
 			return;
 		}
 
@@ -119,12 +130,16 @@ final class CoreBlueprint {
 
 	/** @param string[] $links @return string[] */
 	public static function plugin_links( array $links ): array {
-		if ( ! class_exists( SettingsRegistry::class ) ) {
+		if ( ! self::runtime_ready() || ! class_exists( SettingsRegistry::class ) ) {
 			return $links;
 		}
 
 		$url = SettingsRegistry::url( self::ID );
 		array_unshift( $links, '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Settings', 'core-blueprint-profiles' ) . '</a>' );
 		return $links;
+	}
+
+	private static function runtime_ready(): bool {
+		return function_exists( 'cb_profiles_runtime_ready' ) && \cb_profiles_runtime_ready();
 	}
 }

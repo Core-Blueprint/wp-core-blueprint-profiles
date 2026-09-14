@@ -34,6 +34,9 @@ namespace {
 		$title = strtolower( trim( $title ) );
 		return preg_replace( '/[^a-z0-9]+/', '-', $title ) ?: '';
 	}
+	function cb_profiles_runtime_ready(): bool {
+		return true;
+	}
 
 	function cb_assert( bool $condition, string $message ): void {
 		if ( ! $condition ) {
@@ -89,11 +92,11 @@ namespace {
 	use CB\Profiles\Integration\CoreBlueprint;
 
 	CoreBlueprint::init();
-	cb_assert( isset( $GLOBALS['cb_test_actions']['cb_core_register_extensions'] ), 'ExtensionRegistry hook must be registered during lightweight init.' );
-	cb_assert( isset( $GLOBALS['cb_test_actions']['cb_core_register_settings'] ), 'SettingsRegistry hook must be registered during lightweight init.' );
+	cb_assert( isset( $GLOBALS['cb_test_actions']['cb_core_register_extensions'] ), 'ExtensionRegistry hook must be registered during initialized suite integration.' );
+	cb_assert( isset( $GLOBALS['cb_test_actions']['cb_core_register_settings'] ), 'SettingsRegistry hook must be registered during initialized suite integration.' );
 	cb_assert( ! isset( $GLOBALS['cb_test_actions']['cb_core_register_pages'] ), 'Obsolete PageRegistry hook must not be registered.' );
-	cb_assert( isset( $GLOBALS['cb_test_filters']['cb_core_module_status_definitions'] ), 'Health-provider hook must be registered during lightweight init.' );
-	cb_assert( isset( $GLOBALS['cb_test_actions']['cb_core_dashboard_register_cards'] ), 'Dashboard shortcut hook must be registered during lightweight init.' );
+	cb_assert( isset( $GLOBALS['cb_test_filters']['cb_core_module_status_definitions'] ), 'Health-provider hook must be registered during initialized suite integration.' );
+	cb_assert( isset( $GLOBALS['cb_test_actions']['cb_core_dashboard_register_cards'] ), 'Dashboard shortcut hook must be registered during initialized suite integration.' );
 
 	CoreBlueprint::register_extension();
 	$registration = ExtensionRegistry::$registered[0] ?? [];
@@ -133,12 +136,18 @@ namespace {
 	cb_assert( 'cb_profiles_manage' === ( $shortcut['capability'] ?? '' ), 'Settings shortcut must preserve Profiles capability boundary.' );
 	cb_assert( str_contains( (string) ( $shortcut['url'] ?? '' ), 'extension=core-blueprint-profiles' ), 'Settings shortcut must use the canonical Profiles provider.' );
 
-	$bootstrap = file_get_contents( dirname( __DIR__ ) . '/core-blueprint-profiles.php' );
-	$plugin    = file_get_contents( dirname( __DIR__ ) . '/src/Plugin.php' );
-	cb_assert( false !== strpos( $bootstrap, '\\CB\\Profiles\\Integration\\CoreBlueprint::init();' ), 'Suite integration must initialize before the plugins_loaded runtime gate.' );
-	cb_assert( false !== strpos( $bootstrap, '\\CB\\Core\\Admin\\SettingsRegistry' ), 'Profiles Base readiness must require SettingsRegistry.' );
-	cb_assert( false === strpos( $bootstrap, '\\CB\\Core\\Admin\\PageRegistry' ), 'Profiles Base readiness must not require PageRegistry.' );
+	$bootstrap = (string) file_get_contents( dirname( __DIR__ ) . '/core-blueprint-profiles.php' );
+	$plugin    = (string) file_get_contents( dirname( __DIR__ ) . '/src/Plugin.php' );
+	$core      = (string) file_get_contents( dirname( __DIR__ ) . '/src/Integration/CoreBlueprint.php' );
+	$plugins_loaded = strpos( $bootstrap, "add_action( 'plugins_loaded'" );
+	$runtime_gate = false === $plugins_loaded ? false : strpos( $bootstrap, '\\CB\\Profiles\\Support\\Requirements::runtime_ready()', $plugins_loaded );
+	$core_init = false === $plugins_loaded ? false : strpos( $bootstrap, '\\CB\\Profiles\\Integration\\CoreBlueprint::init();', $plugins_loaded );
+	$feature_boot = false === $plugins_loaded ? false : strpos( $bootstrap, '\\CB\\Profiles\\Plugin::boot();', $plugins_loaded );
+	cb_assert( false !== $plugins_loaded && false !== $runtime_gate && false !== $core_init && false !== $feature_boot && $runtime_gate < $core_init && $core_init < $feature_boot, 'Suite integration must initialize only after Bootstrap readiness and before feature runtime.' );
+	cb_assert( false !== strpos( $bootstrap, '\\CB\\Core\\Admin\\SettingsRegistry' ), 'Profiles product contracts must require SettingsRegistry.' );
+	cb_assert( false === strpos( $bootstrap, '\\CB\\Core\\Admin\\PageRegistry' ), 'Profiles product contracts must not require PageRegistry.' );
 	cb_assert( false === strpos( $plugin, 'CoreBlueprint::init();' ), 'Product runtime must not register suite hooks a second time.' );
+	cb_assert( false !== strpos( $core, "function_exists( 'cb_profiles_runtime_ready' )" ), 'Core Blueprint integration must enforce the shared readiness gate itself.' );
 
 	fwrite( STDOUT, "Profiles dashboard health regression: PASS\n" );
 }

@@ -12,6 +12,9 @@ final class Plugin {
 	private static bool $booted = false;
 
 	public static function boot(): void {
+		if ( ! function_exists( 'cb_profiles_runtime_ready' ) || ! \cb_profiles_runtime_ready() ) {
+			return;
+		}
 		if ( self::$booted ) {
 			return;
 		}
@@ -33,6 +36,9 @@ final class Plugin {
 	}
 
 	public static function register_settings(): void {
+		if ( ! function_exists( 'cb_profiles_runtime_ready' ) || ! \cb_profiles_runtime_ready() ) {
+			return;
+		}
 		register_setting( 'cb_profiles_settings_group', Settings::OPTION, [
 			'type'              => 'array',
 			'sanitize_callback' => [ Settings::class, 'sanitize' ],

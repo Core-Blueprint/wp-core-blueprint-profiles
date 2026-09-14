@@ -34,6 +34,9 @@ namespace {
 		$title = strtolower( trim( $title ) );
 		return preg_replace( '/[^a-z0-9]+/', '-', $title ) ?: '';
 	}
+	function cb_profiles_runtime_ready(): bool {
+		return true;
+	}
 
 	function cb_assert( bool $condition, string $message ): void {
 		if ( ! $condition ) {
@@ -135,6 +138,7 @@ namespace {
 
 	$bootstrap = (string) file_get_contents( dirname( __DIR__ ) . '/core-blueprint-profiles.php' );
 	$plugin    = (string) file_get_contents( dirname( __DIR__ ) . '/src/Plugin.php' );
+	$core      = (string) file_get_contents( dirname( __DIR__ ) . '/src/Integration/CoreBlueprint.php' );
 	$plugins_loaded = strpos( $bootstrap, "add_action( 'plugins_loaded'" );
 	$runtime_gate = false === $plugins_loaded ? false : strpos( $bootstrap, '\\CB\\Profiles\\Support\\Requirements::runtime_ready()', $plugins_loaded );
 	$core_init = false === $plugins_loaded ? false : strpos( $bootstrap, '\\CB\\Profiles\\Integration\\CoreBlueprint::init();', $plugins_loaded );
@@ -143,6 +147,7 @@ namespace {
 	cb_assert( false !== strpos( $bootstrap, '\\CB\\Core\\Admin\\SettingsRegistry' ), 'Profiles product contracts must require SettingsRegistry.' );
 	cb_assert( false === strpos( $bootstrap, '\\CB\\Core\\Admin\\PageRegistry' ), 'Profiles product contracts must not require PageRegistry.' );
 	cb_assert( false === strpos( $plugin, 'CoreBlueprint::init();' ), 'Product runtime must not register suite hooks a second time.' );
+	cb_assert( false !== strpos( $core, "function_exists( 'cb_profiles_runtime_ready' )" ), 'Core Blueprint integration must enforce the shared readiness gate itself.' );
 
 	fwrite( STDOUT, "Profiles dashboard health regression: PASS\n" );
 }

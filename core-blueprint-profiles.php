@@ -12,6 +12,7 @@
  * Domain Path:       /languages
  * Requires at least: 7.0
  * Requires PHP:      8.4
+ * Requires Plugins:  core-blueprint
  */
 
 declare(strict_types=1);
@@ -78,8 +79,8 @@ function cb_profiles_activate(): void {
 		}
 		deactivate_plugins( CB_PROFILES_BASENAME );
 		wp_die(
-			esc_html( 'Core Blueprint Profiles requires an active, Core API 1.x compatible Core Blueprint Base installation.' ),
-			esc_html( 'Core Blueprint dependency required' ),
+			esc_html__( 'Core Blueprint Profiles requires an active, Core API 1.x compatible Core Blueprint Base installation.', 'core-blueprint-profiles' ),
+			esc_html__( 'Core Blueprint dependency required', 'core-blueprint-profiles' ),
 			[ 'back_link' => true ]
 		);
 	}

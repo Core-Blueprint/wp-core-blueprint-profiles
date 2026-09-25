@@ -79,8 +79,8 @@ function cb_profiles_activate(): void {
 		}
 		deactivate_plugins( CB_PROFILES_BASENAME );
 		wp_die(
-			esc_html__( 'Core Blueprint Profiles requires an active, Core API 1.x compatible Core Blueprint Base installation.', 'core-blueprint-profiles' ),
-			esc_html__( 'Core Blueprint dependency required', 'core-blueprint-profiles' ),
+			esc_html( 'Core Blueprint Profiles requires an active, Core API 1.x compatible Core Blueprint Base installation.' ),
+			esc_html( 'Core Blueprint dependency required' ),
 			[ 'back_link' => true ]
 		);
 	}

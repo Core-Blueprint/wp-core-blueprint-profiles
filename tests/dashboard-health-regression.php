@@ -136,8 +136,8 @@ namespace {
 	$bootstrap = file_get_contents( dirname( __DIR__ ) . '/core-blueprint-profiles.php' );
 	$plugin    = file_get_contents( dirname( __DIR__ ) . '/src/Plugin.php' );
 	cb_assert( false !== strpos( $bootstrap, '\\CB\\Profiles\\Integration\\CoreBlueprint::init();' ), 'Suite integration must initialize before the plugins_loaded runtime gate.' );
-	cb_assert( false !== strpos( $bootstrap, '\\CB\\Core\\Admin\\SettingsRegistry' ), 'Profiles Base readiness must require SettingsRegistry.' );
-	cb_assert( false === strpos( $bootstrap, '\\CB\\Core\\Admin\\PageRegistry' ), 'Profiles Base readiness must not require PageRegistry.' );
+	cb_assert( false !== strpos( $bootstrap, '\\\\CB\\\\Core\\\\Admin\\\\SettingsRegistry' ), 'Profiles Base readiness must require SettingsRegistry.' );
+	cb_assert( false === strpos( $bootstrap, '\\\\CB\\\\Core\\\\Admin\\\\PageRegistry' ), 'Profiles Base readiness must not require PageRegistry.' );
 	cb_assert( false === strpos( $plugin, 'CoreBlueprint::init();' ), 'Product runtime must not register suite hooks a second time.' );
 
 	fwrite( STDOUT, "Profiles dashboard health regression: PASS\n" );

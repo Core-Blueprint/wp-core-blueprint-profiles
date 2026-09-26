@@ -42,7 +42,7 @@ $checks = [
 	'canonical settings links are used'          => str_contains( $integration, 'SettingsRegistry::url( self::ID )' ) && ! str_contains( $integration, 'admin.php?page=core-blueprint-profiles' ),
 	'feature CSS does not redefine Base colors'  => ! preg_match( '/--cb-(?:surface|text|border|accent|success|warning|danger)\s*:/', $css ),
 	'feature CSS does not restyle Base buttons'  => ! str_contains( $css, '.button-primary' ) && ! str_contains( $css, '.cb-core-button' ),
-	'public version line is unchanged'           => str_contains( $bootstrap, 'Version:           1.0.0' ) && str_contains( $bootstrap, "define( 'CB_PROFILES_VERSION', '1.0.0' )" ),
+	'public version line is unchanged'           => str_contains( $bootstrap, 'Version:           1.0.0-rc1' ) && str_contains( $bootstrap, "define( 'CB_PROFILES_VERSION', '1.0.0-rc1' )" ),
 ];
 
 $failed = false;

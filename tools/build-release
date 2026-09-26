@@ -21,7 +21,7 @@ fail() {
   exit 1
 }
 
-for command in php node msgfmt zip unzip sha256sum find sort; do
+for command in php node msgfmt zip unzip sha256sum find sort cmp; do
   command -v "$command" >/dev/null 2>&1 || fail "missing required command: $command"
 done
 

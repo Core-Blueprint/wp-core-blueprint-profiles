@@ -1,0 +1,110 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+
+SLUG="core-blueprint-profiles"
+MAIN="core-blueprint-profiles.php"
+ENTRY="$ROOT/$MAIN"
+VERSION="1.0.0-rc1"
+LOCALES=(nl_NL de_DE fr_FR es_ES it_IT pt_PT)
+DIST="$ROOT/dist"
+STAGE="$(mktemp -d)"
+PACKAGE_ROOT="$STAGE/$SLUG"
+ZIP="$DIST/$SLUG-$VERSION.zip"
+CHECKSUM="$ZIP.sha256"
+trap 'rm -rf "$STAGE"' EXIT
+
+fail() {
+  printf 'Profiles release build failed: %s\n' "$*" >&2
+  exit 1
+}
+
+for command in php node msgfmt zip unzip sha256sum find sort; do
+  command -v "$command" >/dev/null 2>&1 || fail "missing required command: $command"
+done
+
+[[ -f "$ENTRY" ]] || fail "plugin entrypoint is missing"
+
+actual_version="$(php -r '$s=file_get_contents($argv[1]); preg_match("/Version:\\s+([^\\r\\n]+)/",$s,$m); echo trim($m[1] ?? "");' "$ENTRY")"
+[[ "$actual_version" == "$VERSION" ]] || fail "unexpected plugin version: $actual_version"
+grep -Eq '^ \* Requires Plugins:[[:space:]]+core-blueprint[[:space:]]*$' "$ENTRY" || fail "Requires Plugins must declare core-blueprint"
+grep -Fq "Stable tag: $VERSION" readme.txt || fail "readme.txt Stable tag does not match plugin version"
+
+echo "==> PHP lint"
+while IFS= read -r -d '' file; do
+  php -l "$file" >/dev/null || fail "PHP lint failed: $file"
+done < <(find . -path './.git' -prune -o -path './dist' -prune -o -type f -name '*.php' -print0)
+
+echo "==> JavaScript syntax"
+while IFS= read -r -d '' file; do
+  node --check "$file" >/dev/null || fail "JavaScript syntax failed: $file"
+done < <(find assets -type f -name '*.js' -print0)
+
+echo "==> Profiles regressions"
+for test in tests/*-regression.php; do
+  [[ -f "$test" ]] || fail "no regression tests found"
+  php "$test"
+done
+
+echo "==> Localization"
+[[ -s "languages/$SLUG.pot" ]] || fail "missing POT catalog"
+for locale in "${LOCALES[@]}"; do
+  po="languages/$SLUG-${locale}.po"
+  mo="languages/$SLUG-${locale}.mo"
+  [[ -s "$po" ]] || fail "missing PO catalog: $po"
+  [[ -s "$mo" ]] || fail "missing MO catalog: $mo"
+
+  tmp_mo="$(mktemp)"
+  msgfmt --check-format --check-header -o "$tmp_mo" "$po"
+  cmp -s "$tmp_mo" "$mo" || {
+    rm -f "$tmp_mo"
+    fail "committed MO is not reproducible from $po"
+  }
+  rm -f "$tmp_mo"
+done
+
+rm -rf "$DIST"
+mkdir -p "$DIST" "$PACKAGE_ROOT"
+
+for file in "$MAIN" readme.txt uninstall.php; do
+  [[ -f "$file" ]] || fail "missing required release file: $file"
+  cp "$file" "$PACKAGE_ROOT/"
+done
+for dir in src assets languages; do
+  [[ -d "$dir" ]] || fail "missing required release directory: $dir"
+  cp -R "$dir" "$PACKAGE_ROOT/"
+done
+
+find "$PACKAGE_ROOT" -type f \( -name '.DS_Store' -o -name '*.map' -o -name '*.pyc' \) -delete
+find "$PACKAGE_ROOT" -exec touch -t 198001010000 {} +
+
+(
+  cd "$STAGE"
+  zip -X -q "$ZIP" "$SLUG/"
+  find "$SLUG" -type f -print | LC_ALL=C sort | zip -X -q "$ZIP" -@
+)
+
+[[ -s "$ZIP" ]] || fail "release ZIP was not created"
+unzip -tqq "$ZIP" || fail "release ZIP integrity check failed"
+ZIP_ENTRIES="$(unzip -Z1 "$ZIP")"
+
+if grep -Eq '(^|/)(\.git|\.github|tests|tools|docs|dist|build|node_modules|vendor)(/|$)' <<<"$ZIP_ENTRIES"; then
+  fail "development-only files leaked into the release ZIP"
+fi
+
+for required in   "$SLUG/$MAIN"   "$SLUG/readme.txt"   "$SLUG/uninstall.php"   "$SLUG/languages/$SLUG.pot"; do
+  grep -Fxq "$required" <<<"$ZIP_ENTRIES" || fail "required release entry missing: $required"
+done
+
+for locale in "${LOCALES[@]}"; do
+  for ext in po mo; do
+    required="$SLUG/languages/$SLUG-${locale}.${ext}"
+    grep -Fxq "$required" <<<"$ZIP_ENTRIES" || fail "required locale entry missing: $required"
+  done
+done
+
+sha256sum "$ZIP" > "$CHECKSUM"
+printf 'Profiles release package: PASS\nArtifact: %s\nChecksum: %s\n' "$ZIP" "$CHECKSUM"
+cat "$CHECKSUM"

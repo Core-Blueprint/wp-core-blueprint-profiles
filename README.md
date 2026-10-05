@@ -2,6 +2,14 @@
 
 Privacy-aware WordPress user profile pages built on native WordPress author archives.
 
+## Requirements
+
+- WordPress 7.0+
+- PHP 8.4+
+- Core Blueprint Base with Core API `1.0` or a compatible newer `1.x` minor and the public Base contracts Profiles consumes
+
+Core Blueprint Base is required. Profiles refuses interactive activation when Base is missing or incompatible, and its runtime remains inactive until the required public Base contracts are available.
+
 ## v1.0.0-rc1
 
 - Guided admin setup for profile availability, visibility, URLs and restricted access.

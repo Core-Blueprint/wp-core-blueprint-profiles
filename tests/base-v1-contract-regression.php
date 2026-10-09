@@ -47,8 +47,8 @@ if ( ! is_string( $bootstrap ) || ! is_string( $integration ) || ! is_string( $r
 }
 
 $checks = [
-	'canonical Base namespace' => str_contains( $bootstrap, 'CoreBlueprint\\Core\\ExtensionRegistry' )
-		&& str_contains( $bootstrap, 'CoreBlueprint\\Core\\Admin\\SettingsRegistry' ),
+	'canonical Base namespace' => str_contains( $bootstrap, "class_exists( '\\\\CoreBlueprint\\\\Core\\\\ExtensionRegistry' )" )
+		&& str_contains( $bootstrap, "class_exists( '\\\\CoreBlueprint\\\\Core\\\\Admin\\\\SettingsRegistry' )" ),
 	'current extension hook' => str_contains( $integration, "'core_blueprint_register_extensions'" ),
 	'current settings hook' => str_contains( $integration, "'core_blueprint_register_settings'" ),
 	'current status hook' => str_contains( $integration, "'core_blueprint_module_status_definitions'" ),

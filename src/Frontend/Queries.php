@@ -24,6 +24,9 @@ final class Queries {
 	 * @return array<int,array<string,int|string>>
 	 */
 	public static function profiles( array $args = [] ): array {
+		if ( ! function_exists( 'cb_profiles_base_ready' ) || ! cb_profiles_base_ready() ) {
+			return [];
+		}
 		$settings = Settings::all();
 		if ( empty( $settings['enabled'] ) ) {
 			return [];

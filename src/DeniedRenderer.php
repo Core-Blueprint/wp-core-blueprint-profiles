@@ -45,6 +45,10 @@ final class DeniedRenderer {
 
 	/** @param array<string,mixed> $args @return array<string,mixed> */
 	public static function sitemap_user_args( array $args ): array {
+		if ( ! function_exists( 'cb_profiles_base_ready' ) || ! cb_profiles_base_ready() ) {
+			$args['include'] = [ -1 ];
+			return $args;
+		}
 		$settings = Settings::all();
 		if ( empty( $settings['enabled'] ) || 'public' !== $settings['visibility'] ) {
 			$args['include'] = [ -1 ];
@@ -58,6 +62,10 @@ final class DeniedRenderer {
 	/** @param array<string,mixed> $args @return array<string,mixed> */
 	public static function rest_user_args( array $args, \WP_REST_Request $request ): array {
 		if ( current_user_can( 'list_users' ) ) {
+			return $args;
+		}
+		if ( ! function_exists( 'cb_profiles_base_ready' ) || ! cb_profiles_base_ready() ) {
+			$args['include'] = [ -1 ];
 			return $args;
 		}
 		$settings = Settings::all();

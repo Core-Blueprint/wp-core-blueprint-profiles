@@ -13,7 +13,7 @@ final class UserProfile {
 	}
 
 	public static function render( \WP_User $user ): void {
-		if ( ! current_user_can( 'edit_user', $user->ID ) ) {
+		if ( ! self::base_ready() || ! current_user_can( 'edit_user', $user->ID ) ) {
 			return;
 		}
 		$enabled  = ProfilePolicy::individual_enabled( (int) $user->ID );
@@ -50,7 +50,7 @@ final class UserProfile {
 	public static function validate( \WP_Error $errors, bool $update, \stdClass $user ): void {
 		unset( $update );
 		$user_id = isset( $user->ID ) ? (int) $user->ID : 0;
-		if ( $user_id <= 0 || ! self::can_edit_slug( $user_id ) || ! isset( $_POST['cb_profiles_public_slug'] ) ) {
+		if ( ! self::base_ready() || $user_id <= 0 || ! self::can_edit_slug( $user_id ) || ! isset( $_POST['cb_profiles_public_slug'] ) ) {
 			return;
 		}
 		$requested = sanitize_text_field( wp_unslash( (string) $_POST['cb_profiles_public_slug'] ) );
@@ -61,7 +61,7 @@ final class UserProfile {
 	}
 
 	public static function save( int $user_id ): void {
-		if ( ! current_user_can( 'edit_user', $user_id ) ) {
+		if ( ! self::base_ready() || ! current_user_can( 'edit_user', $user_id ) ) {
 			return;
 		}
 		$nonce = isset( $_POST['cb_profiles_user_profile_nonce'] ) ? sanitize_text_field( wp_unslash( (string) $_POST['cb_profiles_user_profile_nonce'] ) ) : '';
@@ -74,6 +74,10 @@ final class UserProfile {
 			$requested = sanitize_text_field( wp_unslash( (string) $_POST['cb_profiles_public_slug'] ) );
 			ProfileSlug::set( $user_id, $requested );
 		}
+	}
+
+	private static function base_ready(): bool {
+		return function_exists( 'cb_profiles_base_ready' ) && cb_profiles_base_ready();
 	}
 
 	private static function can_edit_slug( int $user_id ): bool {

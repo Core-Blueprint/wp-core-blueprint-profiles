@@ -27,7 +27,7 @@ final class Conditions {
 	}
 
 	public static function is_own_profile( int $user_id ): bool {
-		return $user_id > 0 && get_current_user_id() === $user_id;
+		return $user_id > 0 && function_exists( 'cb_profiles_base_ready' ) && cb_profiles_base_ready() && get_current_user_id() === $user_id;
 	}
 
 	public static function has_role( int $user_id, string $role ): bool {

@@ -57,6 +57,7 @@ function get_current_user_id(): int { return 0; }
 function apply_filters( string $hook, mixed $value, mixed ...$args ): mixed { return $value; }
 function __( string $text, string $domain = '' ): string { return $text; }
 function is_email( string $value ): bool { return false !== filter_var( $value, FILTER_VALIDATE_EMAIL ); }
+function is_wp_error( mixed $value ): bool { return $value instanceof WP_Error; }
 function current_user_can( string $capability, mixed ...$args ): bool { return false; }
 
 $root = dirname( __DIR__ );

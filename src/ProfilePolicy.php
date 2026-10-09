@@ -7,7 +7,7 @@ final class ProfilePolicy {
 	public const META_ENABLED = '_cb_profiles_public_enabled';
 
 	public static function current_profile_user(): \WP_User|false {
-		if ( ! is_author() ) {
+		if ( ! function_exists( 'cb_profiles_base_ready' ) || ! cb_profiles_base_ready() || ! is_author() ) {
 			return false;
 		}
 		$object = get_queried_object();
@@ -20,6 +20,9 @@ final class ProfilePolicy {
 	}
 
 	public static function is_profile_available( int $user_id ): bool {
+		if ( ! function_exists( 'cb_profiles_base_ready' ) || ! cb_profiles_base_ready() ) {
+			return false;
+		}
 		$settings = Settings::all();
 		if ( empty( $settings['enabled'] ) ) {
 			return false;

@@ -48,6 +48,9 @@ for test in tests/*-regression.php; do
   php "$test"
 done
 
+echo "==> Canonical Golden localization"
+bash tools/i18n/check || fail "canonical i18n source/catalog parity failed"
+
 echo "==> Localization"
 [[ -s "languages/$SLUG.pot" ]] || fail "missing POT catalog"
 for locale in "${LOCALES[@]}"; do

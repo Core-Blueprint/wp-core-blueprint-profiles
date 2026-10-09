@@ -68,8 +68,8 @@ function cb_profiles_api_compatible( string $available, string $required ): bool
 function cb_profiles_base_ready(): bool {
 	return defined( 'CB_CORE_API_VERSION' )
 		&& cb_profiles_api_compatible( (string) CB_CORE_API_VERSION, CB_PROFILES_REQUIRED_API )
-		&& class_exists( '\\CB\\Core\\ExtensionRegistry' )
-		&& class_exists( '\\CB\\Core\\Admin\\SettingsRegistry' );
+		&& class_exists( '\\CoreBlueprint\\Core\\ExtensionRegistry' )
+		&& class_exists( '\\CoreBlueprint\\Core\\Admin\\SettingsRegistry' );
 }
 
 function cb_profiles_activate(): void {
@@ -104,7 +104,7 @@ add_action( 'plugins_loaded', static function (): void {
 
 /** Return the current profile user on an author archive, or false. */
 function cb_profiles_get_profile_user(): \WP_User|false {
-	return \CB\Profiles\ProfilePolicy::current_profile_user();
+	return cb_profiles_base_ready() ? \CB\Profiles\ProfilePolicy::current_profile_user() : false;
 }
 
 /** Return the current profile user ID, or 0 outside a profile. */
@@ -115,12 +115,12 @@ function cb_profiles_get_profile_user_id(): int {
 
 /** Return a profile URL for a WordPress user, or an empty string when unavailable. */
 function cb_profiles_get_profile_url( int $user_id ): string {
-	return \CB\Profiles\Routing::profile_url( $user_id );
+	return cb_profiles_base_ready() ? \CB\Profiles\Routing::profile_url( $user_id ) : '';
 }
 
 /** Determine whether a visitor may view a user's public profile. */
 function cb_profiles_can_view_profile( int $profile_user_id, ?int $viewer_user_id = null ): bool {
-	return \CB\Profiles\ProfilePolicy::can_view( $profile_user_id, $viewer_user_id );
+	return cb_profiles_base_ready() && \CB\Profiles\ProfilePolicy::can_view( $profile_user_id, $viewer_user_id );
 }
 
 /** Determine whether the current request is a Core Blueprint profile request. */

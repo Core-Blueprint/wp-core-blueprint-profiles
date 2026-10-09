@@ -15,12 +15,12 @@ if ( false === $integration || false === $page || false === $assets || false ===
 }
 
 $checks = [
-	'SettingsRegistry lifecycle is registered' => str_contains( $integration, "add_action( 'cb_core_register_settings'" ) && str_contains( $integration, 'SettingsRegistry::register(' ),
+	'SettingsRegistry lifecycle is registered' => str_contains( $integration, "add_action( 'core_blueprint_register_settings'" ) && str_contains( $integration, 'SettingsRegistry::register(' ),
 	'Community group is registered'             => str_contains( $integration, 'SettingsRegistry::GROUP_COMMUNITY' ),
 	'Profiles manage capability is preserved'   => str_contains( $integration, "'capability'  => Capabilities::MANAGE" ),
 	'PageContent remains provider renderer'      => str_contains( $integration, "'renderer'    => [ PageContent::class, 'render' ]" ),
 	'SettingsRegistry requests disclosure'       => str_contains( $integration, "'disclosure'" ),
-	'obsolete PageRegistry lifecycle is absent'  => ! str_contains( $integration, 'cb_core_register_pages' ) && ! str_contains( $integration, 'PageRegistry' ) && ! str_contains( $integration, 'PageBase' ),
+	'obsolete PageRegistry lifecycle is absent'  => ! str_contains( $integration, 'core_blueprint_register_pages' ) && ! str_contains( $integration, 'PageRegistry' ) && ! str_contains( $integration, 'PageBase' ),
 	'obsolete PageBase shell file is absent'     => ! is_file( $root . '/src/Admin/CoreBlueprintPage.php' ),
 	'Base provider shell is not duplicated'      => ! str_contains( $page, 'class="cb-core-title"' ) && ! str_contains( $page, 'class="cb-core-intro"' ) && ! str_contains( $page, 'class="wrap cb-core-wrap' ),
 	'Profiles provider root remains scoped'      => str_contains( $page, 'class="cb-profiles-settings-page"' ),
@@ -38,7 +38,7 @@ $checks = [
 	'conditional field JS is preserved'          => str_contains( $js, 'data-cb-profiles-denied-behavior' ) && str_contains( $js, 'data-cb-profiles-template-source' ) && str_contains( $js, 'data-cb-profiles-enabled-control' ) && str_contains( $js, 'data-cb-profiles-role-count' ),
 	'ordinary checkbox is not enable variant'    => str_contains( $page, '$classes = \'cb-core-field\' . ( $enabled_control ? \' cb-core-field--enable\' : \'\' );' ),
 	'provider assets use canonical identity'     => str_contains( $assets, 'SettingsRegistry::url( CoreBlueprint::ID )' ) && str_contains( $assets, "\$_GET['extension']" ) && ! str_contains( $assets, 'core-blueprint_page_core-blueprint-profiles' ),
-	'Base readiness uses SettingsRegistry'       => str_contains( $bootstrap, "class_exists( '\\\\CB\\\\Core\\\\Admin\\\\SettingsRegistry' )" ) && ! str_contains( $bootstrap, "class_exists( '\\\\CB\\\\Core\\\\Admin\\\\PageRegistry' )" ),
+	'Base readiness uses SettingsRegistry'       => str_contains( $bootstrap, "class_exists( '\\\\CoreBlueprint\\\\Core\\\\Admin\\\\SettingsRegistry' )" ) && ! str_contains( $bootstrap, "class_exists( '\\\\CoreBlueprint\\\\Core\\\\Admin\\\\PageRegistry' )" ),
 	'canonical settings links are used'          => str_contains( $integration, 'SettingsRegistry::url( self::ID )' ) && ! str_contains( $integration, 'admin.php?page=core-blueprint-profiles' ),
 	'feature CSS does not redefine Base colors'  => ! preg_match( '/--cb-(?:surface|text|border|accent|success|warning|danger)\s*:/', $css ),
 	'feature CSS does not restyle Base buttons'  => ! str_contains( $css, '.button-primary' ) && ! str_contains( $css, '.cb-core-button' ),

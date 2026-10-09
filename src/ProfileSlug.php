@@ -8,6 +8,9 @@ final class ProfileSlug {
 	private const MAX_ATTEMPTS = 20;
 
 	public static function get( int $user_id ): string {
+		if ( ! self::base_ready() ) {
+			return '';
+		}
 		$slug = sanitize_title( (string) get_user_meta( $user_id, self::META_SLUG, true ) );
 		if ( '' !== $slug ) {
 			$user = get_userdata( $user_id );
@@ -20,6 +23,9 @@ final class ProfileSlug {
 	}
 
 	public static function find_user_id( string $slug ): int {
+		if ( ! self::base_ready() ) {
+			return 0;
+		}
 		$slug = sanitize_title( $slug );
 		if ( '' === $slug ) {
 			return 0;
@@ -34,6 +40,9 @@ final class ProfileSlug {
 	}
 
 	public static function validate( int $user_id, string $requested ): string|\WP_Error {
+		if ( ! self::base_ready() ) {
+			return new \WP_Error( 'cb_profiles_base_unavailable', __( 'Profile not found.', 'core-blueprint-profiles' ) );
+		}
 		$user = get_userdata( $user_id );
 		if ( ! $user instanceof \WP_User ) {
 			return new \WP_Error( 'cb_profiles_invalid_user', __( 'Invalid profile user.', 'core-blueprint-profiles' ) );
@@ -64,6 +73,9 @@ final class ProfileSlug {
 	}
 
 	public static function generate_and_store( int $user_id ): string {
+		if ( ! self::base_ready() ) {
+			return '';
+		}
 		$user = get_userdata( $user_id );
 		if ( ! $user instanceof \WP_User ) {
 			return '';
@@ -97,6 +109,10 @@ final class ProfileSlug {
 
 		update_user_meta( $user_id, self::META_SLUG, $slug );
 		return $slug;
+	}
+
+	private static function base_ready(): bool {
+		return function_exists( 'cb_profiles_base_ready' ) && cb_profiles_base_ready();
 	}
 
 	private static function candidate_for_format( \WP_User $user, string $format ): string {

@@ -2,9 +2,9 @@
 declare(strict_types=1);
 namespace CB\Profiles\Integration;
 
-use CB\Core\Admin\SettingsRegistry;
-use CB\Core\Dashboard\CardRegistry;
-use CB\Core\ExtensionRegistry;
+use CoreBlueprint\Core\Admin\SettingsRegistry;
+use CoreBlueprint\Core\Dashboard\CardRegistry;
+use CoreBlueprint\Core\ExtensionRegistry;
 use CB\Profiles\Admin\PageContent;
 use CB\Profiles\Capabilities;
 use CB\Profiles\Settings;
@@ -22,10 +22,10 @@ final class CoreBlueprint {
 		}
 		self::$initialized = true;
 
-		add_action( 'cb_core_register_extensions', [ __CLASS__, 'register_extension' ] );
-		add_filter( 'cb_core_module_status_definitions', [ __CLASS__, 'register_status_definition' ] );
-		add_action( 'cb_core_register_settings', [ __CLASS__, 'register_settings_provider' ] );
-		add_action( 'cb_core_dashboard_register_cards', [ __CLASS__, 'register_dashboard_shortcuts' ] );
+		add_action( 'core_blueprint_register_extensions', [ __CLASS__, 'register_extension' ] );
+		add_filter( 'core_blueprint_module_status_definitions', [ __CLASS__, 'register_status_definition' ] );
+		add_action( 'core_blueprint_register_settings', [ __CLASS__, 'register_settings_provider' ] );
+		add_action( 'core_blueprint_dashboard_register_cards', [ __CLASS__, 'register_dashboard_shortcuts' ] );
 		add_filter( 'plugin_action_links_' . CB_PROFILES_BASENAME, [ __CLASS__, 'plugin_links' ] );
 	}
 

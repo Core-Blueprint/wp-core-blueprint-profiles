@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace CB\Profiles\Admin;
 
-use CB\Core\Admin\SettingsRegistry;
+use CoreBlueprint\Core\Admin\SettingsRegistry;
 use CB\Profiles\Integration\CoreBlueprint;
 
 defined( 'ABSPATH' ) || exit;

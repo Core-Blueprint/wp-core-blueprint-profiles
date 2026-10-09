@@ -12,7 +12,7 @@ final class Plugin {
 	private static bool $booted = false;
 
 	public static function boot(): void {
-		if ( self::$booted ) {
+		if ( self::$booted || ! function_exists( 'cb_profiles_base_ready' ) || ! cb_profiles_base_ready() ) {
 			return;
 		}
 		self::$booted = true;
@@ -20,7 +20,7 @@ final class Plugin {
 		Install::maybe_upgrade();
 		add_action( 'admin_init', [ __CLASS__, 'register_settings' ] );
 		add_filter( 'option_page_capability_cb_profiles_settings_group', static fn(): string => Capabilities::MANAGE );
-		add_filter( 'cb_core_capability_catalog', [ Capabilities::class, 'register_catalog' ] );
+		add_filter( 'core_blueprint_capability_catalog', [ Capabilities::class, 'register_catalog' ] );
 
 		Routing::init();
 		DeniedRenderer::init();

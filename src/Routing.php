@@ -33,15 +33,12 @@ final class Routing {
 		if ( '' === $slug ) {
 			return $vars;
 		}
+		if ( ! function_exists( 'cb_profiles_base_ready' ) || ! cb_profiles_base_ready() ) {
+			$vars['error'] = '404';
+			return $vars;
+		}
 
 		$user_id = ProfileSlug::find_user_id( $slug );
-		if ( $user_id <= 0 ) {
-			$legacy_user = get_user_by( 'slug', $slug );
-			if ( $legacy_user instanceof \WP_User && ! self::native_identifier_is_sensitive( $legacy_user ) ) {
-				ProfileSlug::get( (int) $legacy_user->ID );
-				$user_id = (int) $legacy_user->ID;
-			}
-		}
 		if ( $user_id <= 0 ) {
 			$vars['error'] = '404';
 			return $vars;

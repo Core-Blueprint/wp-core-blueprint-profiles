@@ -20,7 +20,7 @@ namespace {
 	}
 }
 
-namespace CB\Core\Admin {
+namespace CoreBlueprint\Core\Admin {
 	final class SettingsRegistry {
 		/** @param array<string,scalar> $query */
 		public static function url( string $extension_id, array $query = [] ): string {

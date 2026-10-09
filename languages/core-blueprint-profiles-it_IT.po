@@ -1,16 +1,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Core Blueprint Profiles 1.0.0\n"
+"Project-Id-Version: Core Blueprint Profiles 1.0.0-rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-03 00:40+0000\n"
-"PO-Revision-Date: 2026-09-03 00:00+0000\n"
+"POT-Creation-Date: 2026-10-09 00:00+0000\n"
+"PO-Revision-Date: 2026-10-09 00:00+0000\n"
 "Last-Translator: Core Blueprint\n"
 "Language-Team: it_IT\n"
 "Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Core Blueprint i18n tooling 1.1.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Domain: core-blueprint-profiles\n"
 
@@ -60,9 +61,8 @@ msgid "Choose who can open an enabled user profile."
 msgstr "Scegli chi può aprire un profilo utente abilitato."
 
 #: src/Admin/PageContent.php:16
-#, fuzzy
 msgid "Core Blueprint"
-msgstr "Core Blueprint Profiles"
+msgstr "Core Blueprint"
 
 #: core-blueprint-profiles.php:91
 msgid "Core Blueprint Base with API 1.0 or newer is required."
@@ -365,10 +365,6 @@ msgstr "Shortcode"
 msgid "Show 404"
 msgstr "Mostra 404"
 
-#: src/Admin/PageContent.php:72
-msgid "Show or hide role options"
-msgstr "Mostra o nascondi le opzioni del ruolo"
-
 #: src/Admin/PageContent.php:108
 msgid "Template shortcode"
 msgstr "Shortcode del template"
@@ -478,3 +474,82 @@ msgstr "richiede PHP 8.4 o versione successiva. Questo server esegue PHP%s."
 #: src/Admin/PageContent.php:125
 msgid "whether the current request is a profile."
 msgstr "se la richiesta corrente corrisponde a un profilo."
+
+#: src/Frontend/Data.php
+msgid "This profile is not available to the current visitor."
+msgstr "Questo profilo non è disponibile per il visitatore attuale."
+
+#: src/Integration/Builders/Bricks/Conditions.php
+msgid "Is a profile request"
+msgstr "È una richiesta di profilo"
+
+#: src/Integration/Builders/Bricks/Conditions.php
+msgid "Visitor can view profile"
+msgstr "Il visitatore può visualizzare il profilo"
+
+#: src/Integration/Builders/Bricks/Conditions.php
+msgid "Profile is available"
+msgstr "Il profilo è disponibile"
+
+#: src/Integration/Builders/Bricks/Conditions.php
+msgid "Visitor is profile owner"
+msgstr "Il visitatore è il proprietario del profilo"
+
+#: src/Integration/Builders/Bricks/Conditions.php
+msgid "Profile role"
+msgstr "Ruolo del profilo"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · User ID"
+msgstr "Profilo · ID utente"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · Display name"
+msgstr "Profilo · Nome visualizzato"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · First name"
+msgstr "Profilo · Nome"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · Last name"
+msgstr "Profilo · Cognome"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · Bio"
+msgstr "Profilo · Biografia"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · URL"
+msgstr "Profilo · URL"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · Public slug"
+msgstr "Profilo · Slug pubblico"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · Avatar URL"
+msgstr "Profilo · URL dell'avatar"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · Website URL"
+msgstr "Profilo · URL del sito web"
+
+#: src/Integration/Builders/Bricks/Queries.php
+msgid "Profiles: Members"
+msgstr "Profili: Membri"
+
+#: src/Integration/Builders/Bricks/Queries.php
+msgid "Profiles: Current profile"
+msgstr "Profili: Profilo corrente"
+
+#. Description of the plugin
+#: core-blueprint-profiles.php
+msgid "Lightweight privacy-aware WordPress profile pages with configurable URLs, visibility and builder-friendly author archives."
+msgstr "Pagine profilo WordPress leggere e attente alla privacy, con URL e visibilità configurabili e archivi autore compatibili con i page builder."
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: core-blueprint-profiles.php
+msgid "https://coreblueprint.io"
+msgstr "https://coreblueprint.io"

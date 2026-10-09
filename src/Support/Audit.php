@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace CB\Profiles\Support;
 
-use CB\Core\Log\AuditLog;
+use CoreBlueprint\Core\Log\AuditLog;
 use CB\Profiles\Settings;
 
 defined( 'ABSPATH' ) || exit;
@@ -16,7 +16,9 @@ defined( 'ABSPATH' ) || exit;
 final class Audit {
 	public static function init(): void {
 		add_action( 'update_option_' . Settings::OPTION, [ __CLASS__, 'settings_updated' ], 10, 3 );
-		add_filter( 'cb_core_event_labels', [ __CLASS__, 'register_event_labels' ] );
+		// Base v1 uses the public EventRegistry for metadata, not the removed
+		// cb_core event-label filter. This dormant bridge must not opt into a
+		// new registration model without a separate governed event-ID review.
 	}
 
 	/**

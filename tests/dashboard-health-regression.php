@@ -43,7 +43,7 @@ namespace {
 	}
 }
 
-namespace CB\Core {
+namespace CoreBlueprint\Core {
 	final class ExtensionRegistry {
 		public static array $registered = [];
 		public static function register( array $definition ): void {
@@ -52,7 +52,7 @@ namespace CB\Core {
 	}
 }
 
-namespace CB\Core\Admin {
+namespace CoreBlueprint\Core\Admin {
 	final class SettingsRegistry {
 		public const GROUP_COMMUNITY = 'community';
 		public static array $registered = [];
@@ -69,7 +69,7 @@ namespace CB\Core\Admin {
 	}
 }
 
-namespace CB\Core\Dashboard {
+namespace CoreBlueprint\Core\Dashboard {
 	final class CardRegistry {
 		public static array $shortcuts = [];
 		public static function register_shortcut( string $extension_id, array $shortcut ): void {
@@ -83,17 +83,17 @@ namespace {
 	require_once dirname( __DIR__ ) . '/src/Capabilities.php';
 	require_once dirname( __DIR__ ) . '/src/Integration/CoreBlueprint.php';
 
-	use CB\Core\Admin\SettingsRegistry;
-	use CB\Core\Dashboard\CardRegistry;
-	use CB\Core\ExtensionRegistry;
+	use CoreBlueprint\Core\Admin\SettingsRegistry;
+	use CoreBlueprint\Core\Dashboard\CardRegistry;
+	use CoreBlueprint\Core\ExtensionRegistry;
 	use CB\Profiles\Integration\CoreBlueprint;
 
 	CoreBlueprint::init();
-	cb_assert( isset( $GLOBALS['cb_test_actions']['cb_core_register_extensions'] ), 'ExtensionRegistry hook must be registered during lightweight init.' );
-	cb_assert( isset( $GLOBALS['cb_test_actions']['cb_core_register_settings'] ), 'SettingsRegistry hook must be registered during lightweight init.' );
-	cb_assert( ! isset( $GLOBALS['cb_test_actions']['cb_core_register_pages'] ), 'Obsolete PageRegistry hook must not be registered.' );
-	cb_assert( isset( $GLOBALS['cb_test_filters']['cb_core_module_status_definitions'] ), 'Health-provider hook must be registered during lightweight init.' );
-	cb_assert( isset( $GLOBALS['cb_test_actions']['cb_core_dashboard_register_cards'] ), 'Dashboard shortcut hook must be registered during lightweight init.' );
+	cb_assert( isset( $GLOBALS['cb_test_actions']['core_blueprint_register_extensions'] ), 'ExtensionRegistry hook must be registered during lightweight init.' );
+	cb_assert( isset( $GLOBALS['cb_test_actions']['core_blueprint_register_settings'] ), 'SettingsRegistry hook must be registered during lightweight init.' );
+	cb_assert( ! isset( $GLOBALS['cb_test_actions']['core_blueprint_register_pages'] ), 'Obsolete PageRegistry hook must not be registered.' );
+	cb_assert( isset( $GLOBALS['cb_test_filters']['core_blueprint_module_status_definitions'] ), 'Health-provider hook must be registered during lightweight init.' );
+	cb_assert( isset( $GLOBALS['cb_test_actions']['core_blueprint_dashboard_register_cards'] ), 'Dashboard shortcut hook must be registered during lightweight init.' );
 
 	CoreBlueprint::register_extension();
 	$registration = ExtensionRegistry::$registered[0] ?? [];
@@ -136,8 +136,8 @@ namespace {
 	$bootstrap = file_get_contents( dirname( __DIR__ ) . '/core-blueprint-profiles.php' );
 	$plugin    = file_get_contents( dirname( __DIR__ ) . '/src/Plugin.php' );
 	cb_assert( false !== strpos( $bootstrap, '\\CB\\Profiles\\Integration\\CoreBlueprint::init();' ), 'Suite integration must initialize before the plugins_loaded runtime gate.' );
-	cb_assert( false !== strpos( $bootstrap, '\\\\CB\\\\Core\\\\Admin\\\\SettingsRegistry' ), 'Profiles Base readiness must require SettingsRegistry.' );
-	cb_assert( false === strpos( $bootstrap, '\\\\CB\\\\Core\\\\Admin\\\\PageRegistry' ), 'Profiles Base readiness must not require PageRegistry.' );
+	cb_assert( false !== strpos( $bootstrap, '\\\\CoreBlueprint\\\\Core\\\\Admin\\\\SettingsRegistry' ), 'Profiles Base readiness must require SettingsRegistry.' );
+	cb_assert( false === strpos( $bootstrap, '\\\\CoreBlueprint\\\\Core\\\\Admin\\\\PageRegistry' ), 'Profiles Base readiness must not require PageRegistry.' );
 	cb_assert( false === strpos( $plugin, 'CoreBlueprint::init();' ), 'Product runtime must not register suite hooks a second time.' );
 
 	fwrite( STDOUT, "Profiles dashboard health regression: PASS\n" );

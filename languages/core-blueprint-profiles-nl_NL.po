@@ -1,16 +1,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Core Blueprint Profiles 1.0.0\n"
+"Project-Id-Version: Core Blueprint Profiles 1.0.0-rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-03 00:40+0000\n"
-"PO-Revision-Date: 2026-09-03 00:00+0000\n"
+"POT-Creation-Date: 2026-10-09 00:00+0000\n"
+"PO-Revision-Date: 2026-10-09 00:00+0000\n"
 "Last-Translator: Core Blueprint\n"
 "Language-Team: nl_NL\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Core Blueprint i18n tooling 1.1.1\n"
 
 #: src/Admin/PageContent.php:50
 msgid "Anonymous identifier — Recommended for privacy"
@@ -274,23 +275,20 @@ msgid "Profiles: URL format changed"
 msgstr "Profielen: URL-formaat gewijzigd"
 
 #: src/Support/Audit.php:128
-#, fuzzy
 msgid "Profiles: base URL changed"
-msgstr "Basispad voor profielen"
+msgstr "Profielen: basis-URL gewijzigd"
 
 #: src/Support/Audit.php:131
 msgid "Profiles: excluded roles changed"
 msgstr "Profielen: uitgesloten rollen gewijzigd"
 
 #: src/Support/Audit.php:126
-#, fuzzy
 msgid "Profiles: profile pages disabled"
-msgstr "Profielpagina’s zijn momenteel uitgeschakeld."
+msgstr "Profielen: profielpagina's uitgeschakeld"
 
 #: src/Support/Audit.php:125
-#, fuzzy
 msgid "Profiles: profile pages enabled"
-msgstr "Profielpagina’s inschakelen"
+msgstr "Profielen: profielpagina's ingeschakeld"
 
 #: src/Support/Audit.php:132
 msgid "Profiles: restricted access settings changed"
@@ -309,19 +307,16 @@ msgid "Profiles: user profile URL rotated for privacy"
 msgstr "Profielen: URL van gebruikersprofiel geroteerd vanwege privacy"
 
 #: src/Support/Audit.php:134
-#, fuzzy
 msgid "Profiles: user profile disabled"
-msgstr "Profielpagina’s zijn momenteel uitgeschakeld."
+msgstr "Profielen: gebruikersprofiel uitgeschakeld"
 
 #: src/Support/Audit.php:133
-#, fuzzy
 msgid "Profiles: user profile enabled"
-msgstr "Profielpagina van deze gebruiker inschakelen"
+msgstr "Profielen: gebruikersprofiel ingeschakeld"
 
 #: src/Support/Audit.php:127
-#, fuzzy
 msgid "Profiles: visibility changed"
-msgstr "controle van profielzichtbaarheid."
+msgstr "Profielen: zichtbaarheid gewijzigd"
 
 #: src/Admin/PageContent.php:100
 msgid "Redirect"
@@ -362,10 +357,6 @@ msgstr "Shortcode"
 #: src/Admin/PageContent.php:100
 msgid "Show 404"
 msgstr "404 tonen"
-
-#: src/Admin/PageContent.php:72
-msgid "Show or hide role options"
-msgstr "Rolopties tonen of verbergen"
 
 #: src/Admin/PageContent.php:108
 msgid "Template shortcode"
@@ -474,3 +465,82 @@ msgstr "vereist PHP 8.4 of hoger. Deze server draait PHP%s."
 #: src/Admin/PageContent.php:125
 msgid "whether the current request is a profile."
 msgstr "of het huidige verzoek een profiel is."
+
+#: src/Frontend/Data.php
+msgid "This profile is not available to the current visitor."
+msgstr "Dit profiel is niet beschikbaar voor de huidige bezoeker."
+
+#: src/Integration/Builders/Bricks/Conditions.php
+msgid "Is a profile request"
+msgstr "Is een profielverzoek"
+
+#: src/Integration/Builders/Bricks/Conditions.php
+msgid "Visitor can view profile"
+msgstr "Bezoeker kan profiel bekijken"
+
+#: src/Integration/Builders/Bricks/Conditions.php
+msgid "Profile is available"
+msgstr "Profiel is beschikbaar"
+
+#: src/Integration/Builders/Bricks/Conditions.php
+msgid "Visitor is profile owner"
+msgstr "Bezoeker is profieleigenaar"
+
+#: src/Integration/Builders/Bricks/Conditions.php
+msgid "Profile role"
+msgstr "Profielrol"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · User ID"
+msgstr "Profiel · Gebruikers-ID"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · Display name"
+msgstr "Profiel · Weergavenaam"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · First name"
+msgstr "Profiel · Voornaam"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · Last name"
+msgstr "Profiel · Achternaam"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · Bio"
+msgstr "Profiel · Biografie"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · URL"
+msgstr "Profiel · URL"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · Public slug"
+msgstr "Profiel · Publieke slug"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · Avatar URL"
+msgstr "Profiel · Avatar-URL"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · Website URL"
+msgstr "Profiel · Website-URL"
+
+#: src/Integration/Builders/Bricks/Queries.php
+msgid "Profiles: Members"
+msgstr "Profielen: Leden"
+
+#: src/Integration/Builders/Bricks/Queries.php
+msgid "Profiles: Current profile"
+msgstr "Profielen: Huidig profiel"
+
+#. Description of the plugin
+#: core-blueprint-profiles.php
+msgid "Lightweight privacy-aware WordPress profile pages with configurable URLs, visibility and builder-friendly author archives."
+msgstr "Lichtgewicht, privacybewuste WordPress-profielpagina's met instelbare URL's, zichtbaarheid en buildervriendelijke auteursarchieven."
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: core-blueprint-profiles.php
+msgid "https://coreblueprint.io"
+msgstr "https://coreblueprint.io"

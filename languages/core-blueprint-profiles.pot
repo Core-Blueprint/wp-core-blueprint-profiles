@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the Core Blueprint Profiles package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Core Blueprint Profiles 1.0.0\n"
+"Project-Id-Version: Core Blueprint Profiles 1.0.0-rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-03 00:40+0000\n"
+"POT-Creation-Date: 2026-10-09 00:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +15,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Core Blueprint i18n tooling 1.1.1\n"
 
 #: src/Admin/PageContent.php:50
 msgid "Anonymous identifier — Recommended for privacy"
@@ -337,10 +337,6 @@ msgstr ""
 msgid "Show 404"
 msgstr ""
 
-#: src/Admin/PageContent.php:72
-msgid "Show or hide role options"
-msgstr ""
-
 #: src/Admin/PageContent.php:108
 msgid "Template shortcode"
 msgstr ""
@@ -433,4 +429,83 @@ msgstr ""
 
 #: src/Admin/PageContent.php:125
 msgid "whether the current request is a profile."
+msgstr ""
+
+#: src/Frontend/Data.php
+msgid "This profile is not available to the current visitor."
+msgstr ""
+
+#: src/Integration/Builders/Bricks/Conditions.php
+msgid "Is a profile request"
+msgstr ""
+
+#: src/Integration/Builders/Bricks/Conditions.php
+msgid "Visitor can view profile"
+msgstr ""
+
+#: src/Integration/Builders/Bricks/Conditions.php
+msgid "Profile is available"
+msgstr ""
+
+#: src/Integration/Builders/Bricks/Conditions.php
+msgid "Visitor is profile owner"
+msgstr ""
+
+#: src/Integration/Builders/Bricks/Conditions.php
+msgid "Profile role"
+msgstr ""
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · User ID"
+msgstr ""
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · Display name"
+msgstr ""
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · First name"
+msgstr ""
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · Last name"
+msgstr ""
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · Bio"
+msgstr ""
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · URL"
+msgstr ""
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · Public slug"
+msgstr ""
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · Avatar URL"
+msgstr ""
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · Website URL"
+msgstr ""
+
+#: src/Integration/Builders/Bricks/Queries.php
+msgid "Profiles: Members"
+msgstr ""
+
+#: src/Integration/Builders/Bricks/Queries.php
+msgid "Profiles: Current profile"
+msgstr ""
+
+#. Description of the plugin
+#: core-blueprint-profiles.php
+msgid "Lightweight privacy-aware WordPress profile pages with configurable URLs, visibility and builder-friendly author archives."
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: core-blueprint-profiles.php
+msgid "https://coreblueprint.io"
 msgstr ""

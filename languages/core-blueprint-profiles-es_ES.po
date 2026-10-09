@@ -1,16 +1,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Core Blueprint Profiles 1.0.0\n"
+"Project-Id-Version: Core Blueprint Profiles 1.0.0-rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-03 00:40+0000\n"
-"PO-Revision-Date: 2026-09-03 00:00+0000\n"
+"POT-Creation-Date: 2026-10-09 00:00+0000\n"
+"PO-Revision-Date: 2026-10-09 00:00+0000\n"
 "Last-Translator: Core Blueprint\n"
 "Language-Team: es_ES\n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Core Blueprint i18n tooling 1.1.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Domain: core-blueprint-profiles\n"
 
@@ -60,9 +61,8 @@ msgid "Choose who can open an enabled user profile."
 msgstr "Elige quién puede abrir un perfil de usuario habilitado."
 
 #: src/Admin/PageContent.php:16
-#, fuzzy
 msgid "Core Blueprint"
-msgstr "Core Blueprint Profiles"
+msgstr "Core Blueprint"
 
 #: core-blueprint-profiles.php:91
 msgid "Core Blueprint Base with API 1.0 or newer is required."
@@ -364,10 +364,6 @@ msgstr "Shortcode"
 msgid "Show 404"
 msgstr "Mostrar 404"
 
-#: src/Admin/PageContent.php:72
-msgid "Show or hide role options"
-msgstr "Mostrar u ocultar opciones de rol"
-
 #: src/Admin/PageContent.php:108
 msgid "Template shortcode"
 msgstr "Shortcode de plantilla"
@@ -477,3 +473,82 @@ msgstr "requiere PHP 8.4 o superior. Este servidor ejecuta PHP%s."
 #: src/Admin/PageContent.php:125
 msgid "whether the current request is a profile."
 msgstr "si la solicitud actual corresponde a un perfil."
+
+#: src/Frontend/Data.php
+msgid "This profile is not available to the current visitor."
+msgstr "Este perfil no está disponible para el visitante actual."
+
+#: src/Integration/Builders/Bricks/Conditions.php
+msgid "Is a profile request"
+msgstr "Es una solicitud de perfil"
+
+#: src/Integration/Builders/Bricks/Conditions.php
+msgid "Visitor can view profile"
+msgstr "El visitante puede ver el perfil"
+
+#: src/Integration/Builders/Bricks/Conditions.php
+msgid "Profile is available"
+msgstr "El perfil está disponible"
+
+#: src/Integration/Builders/Bricks/Conditions.php
+msgid "Visitor is profile owner"
+msgstr "El visitante es propietario del perfil"
+
+#: src/Integration/Builders/Bricks/Conditions.php
+msgid "Profile role"
+msgstr "Rol del perfil"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · User ID"
+msgstr "Perfil · ID de usuario"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · Display name"
+msgstr "Perfil · Nombre visible"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · First name"
+msgstr "Perfil · Nombre"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · Last name"
+msgstr "Perfil · Apellidos"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · Bio"
+msgstr "Perfil · Biografía"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · URL"
+msgstr "Perfil · URL"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · Public slug"
+msgstr "Perfil · Slug público"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · Avatar URL"
+msgstr "Perfil · URL del avatar"
+
+#: src/Integration/Builders/Bricks/DynamicData.php
+msgid "Profile · Website URL"
+msgstr "Perfil · URL del sitio web"
+
+#: src/Integration/Builders/Bricks/Queries.php
+msgid "Profiles: Members"
+msgstr "Perfiles: Miembros"
+
+#: src/Integration/Builders/Bricks/Queries.php
+msgid "Profiles: Current profile"
+msgstr "Perfiles: Perfil actual"
+
+#. Description of the plugin
+#: core-blueprint-profiles.php
+msgid "Lightweight privacy-aware WordPress profile pages with configurable URLs, visibility and builder-friendly author archives."
+msgstr "Páginas de perfil de WordPress ligeras y respetuosas con la privacidad, con URL y visibilidad configurables y archivos de autor compatibles con maquetadores."
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: core-blueprint-profiles.php
+msgid "https://coreblueprint.io"
+msgstr "https://coreblueprint.io"
